@@ -116,12 +116,11 @@
             box-shadow: 0 4px 10px rgba(46, 92, 78, 0.25);
         }
 
-        /* 动态网格替换瀑布流 */
         .dynamic-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 16px;
-            perspective: 1000px; /* 3D 效果 */
+            perspective: 1000px;
         }
 
         .photo-card {
@@ -131,12 +130,10 @@
             cursor: pointer;
             background: #E8F0EC;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            /* 弹性动画入场 */
             animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             transform-origin: center;
         }
 
-        /* 入场动画 */
         @keyframes popIn {
             0% { opacity: 0; transform: scale(0.8) translateY(20px) rotateX(-10deg); }
             100% { opacity: 1; transform: scale(1) translateY(0) rotateX(0); }
@@ -150,7 +147,6 @@
             transition: transform 0.5s ease, filter 0.3s ease;
         }
 
-        /* 3D 悬浮效果 */
         .photo-card:hover {
             z-index: 10;
             box-shadow: 0 15px 30px rgba(46, 92, 78, 0.3);
@@ -345,6 +341,7 @@
                 <span class="tag">ENFP</span>
                 <span class="tag">Child-friendly</span>
                 <span class="tag">Coachable</span>
+                <span class="tag">Creative and imaginative</span>
                 <span class="tag">Sports & Outdoor Enthusiast</span>
                 <span class="tag">Photography & Music</span>
                 <span class="tag">Independent traveler(30+ cities)</span>
@@ -491,18 +488,17 @@
             { src: "ukulele.jpg",         title: "Ukulele",                  category: "arts" },
             { src: "musicfilm.jpg",       title: "Music Short Film",         category: "arts" },
             { src: "wuzhen.jpg",          title: "Wuzhen Theatre Festival",  category: "arts" },
-            { src: "jungle.jpg",          title: "Jungle Survival",          category: "outdoor" },
             { src: "climbing.jpg",        title: "Rock Climbing",            category: "sports" },
             { src: "track.jpg",           title: "Track & Field",            category: "sports" },
-            { src: "treeclimbing.jpg",    title: "Tree Climbing",            category: "outdoor" },
             { src: "basketball.jpg",      title: "Basketball",               category: "sports" },
             { src: "swimming.jpg",        title: "Swimming",                 category: "sports" },
             { src: "archery.jpg",         title: "Archery",                  category: "sports" },
+            { src: "snowmountain.jpg",    title: "Snow Mountains",           category: "outdoor" },
             { src: "naturephoto.jpg",     title: "Nature Photography",       category: "outdoor" },
             { src: "rafting.jpg",         title: "Rafting",                  category: "outdoor" },
-            { src: "snowmountain.jpg",    title: "Snow Mountains",           category: "outdoor" },
-            { src: "guzheng.jpg",         title: "Chinese GuZheng",          category: "arts" },
-            { src: "speech.jpg",              title: "speech",               category: "arts" },
+            { src: "jungle.jpg",          title: "Jungle Survival",          category: "outdoor" },
+            { src: "treeclimbing.jpg",    title: "Tree Climbing",            category: "outdoor" },
+            { src: "jungleexplore.jpg",   title: "Jungle Exploration",       category: "outdoor" },
             { src: "camping.jpg",         title: "Wilderness Camping",       category: "outdoor" }
         ];
 
@@ -512,7 +508,6 @@
         let visiblePhotos = []; 
         let currentIndex = 0;
 
-        /* ---------- 渲染动态网格 ---------- */
         function renderWall(filter) {
             wall.innerHTML = "";
             const list = filter === "all"
@@ -522,7 +517,6 @@
             list.forEach((photo, i) => {
                 const card = document.createElement("div");
                 card.className = "photo-card";
-                // 加入交错动画延迟，产生“洗牌掉落”的效果
                 card.style.animationDelay = (i * 0.05) + "s";
                 card.dataset.index = i;
 
@@ -540,7 +534,6 @@
             });
         }
 
-        /* ---------- 筛选 ---------- */
         filterBar.addEventListener("click", e => {
             const btn = e.target.closest(".filter-btn");
             if (!btn) return;
@@ -551,7 +544,6 @@
             renderWall(btn.dataset.filter);
         });
 
-        /* ---------- 灯箱 ---------- */
         const lightbox = document.getElementById("lightbox");
         const lbImg = document.getElementById("lbImg");
         const lbCaption = document.getElementById("lbCaption");
@@ -574,7 +566,6 @@
             lbCaption.textContent = photo.title;
             lbCount.textContent = `${currentIndex + 1} / ${visiblePhotos.length}`;
 
-            // 重触发缩放动画
             lbImg.style.animation = "none";
             void lbImg.offsetWidth;
             lbImg.style.animation = "";
@@ -615,7 +606,6 @@
             if (e.key === "ArrowLeft") prevPhoto();
         });
 
-        /* ---------- 初始化 ---------- */
         renderWall("all");
     </script>
 </body>
