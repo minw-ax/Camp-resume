@@ -24,7 +24,6 @@
 
         .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
 
-        /* Hero Section */
         header {
             text-align: center;
             padding: 60px 0 40px;
@@ -33,7 +32,6 @@
             margin-bottom: 40px;
         }
 
-        /* 照片与叶子边框 */
         .photo-wrapper { position: relative; display: inline-block; margin-bottom: 25px; padding: 15px; }
         .profile-pic {
             width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
@@ -52,14 +50,12 @@
         h1 { font-family: 'Lora', serif; font-size: 3em; color: var(--primary); margin-bottom: 10px; }
         .subtitle { font-size: 1.2em; color: var(--text-light); margin-bottom: 20px; }
 
-        /* Tags */
         .keywords { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
         .tag {
             background-color: #fff; color: var(--primary); padding: 6px 16px; border-radius: 20px;
             font-size: 0.9em; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border: 1px solid #E0E7E3;
         }
 
-        /* Sections */
         section {
             background-color: #fff; padding: 40px; border-radius: 16px;
             margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
@@ -69,7 +65,6 @@
             padding-bottom: 10px; margin-bottom: 25px; font-size: 1.6em;
         }
 
-        /* Experience */
         .exp-item { margin-bottom: 25px; }
         .exp-title { font-weight: 700; font-size: 1.1em; display: flex; justify-content: space-between; align-items: baseline; }
         .exp-title span { font-weight: 400; color: var(--text-light); font-size: 0.9em; }
@@ -77,10 +72,90 @@
         ul { padding-left: 20px; margin-top: 10px; }
         li { margin-bottom: 8px; color: #444; }
 
-        /* Grid */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
         .highlight-box { background-color: #F4F8F6; padding: 20px; border-radius: 12px; border-left: 4px solid var(--primary); }
         .highlight-box h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.1em; }
+
+        /* ========== 媒体卡片网格 ========== */
+        .media-subhead {
+            font-family: 'Lora', serif;
+            color: var(--primary);
+            font-size: 1.3em;
+            margin: 10px 0 6px;
+        }
+        .media-subhead .hint {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
+            color: var(--text-light);
+            font-weight: 400;
+            margin-left: 8px;
+        }
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+        .media-card {
+            position: relative;
+            background: #fff;
+            border: 1px solid #E5ECE8;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+        .media-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(46, 92, 78, 0.18);
+            border-color: var(--primary);
+        }
+        .media-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            background: #E8F0EC;
+            overflow: hidden;
+        }
+        .media-thumb img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 0.4s ease;
+        }
+        .media-card:hover .media-thumb img { transform: scale(1.06); }
+        .play-badge {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px; height: 44px;
+            background: rgba(0,0,0,0.55);
+            color: #fff;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+            padding-left: 3px;
+            backdrop-filter: blur(2px);
+            pointer-events: none;
+        }
+        .media-info {
+            padding: 10px 12px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .media-name {
+            font-weight: 600;
+            font-size: 0.92em;
+            color: var(--text-main);
+            line-height: 1.25;
+        }
+        .media-type {
+            font-size: 0.72em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--primary);
+            font-weight: 700;
+        }
 
         /* 按钮 */
         .gallery-btn-wrapper { text-align: center; margin-top: 30px; }
@@ -101,8 +176,6 @@
             border-radius: 12px;
             box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
         }
-
-        /* 胶卷上下齿孔 */
         .film-strip::before, .film-strip::after {
             content: '';
             position: absolute;
@@ -112,22 +185,13 @@
         }
         .film-strip::before { top: 8px; }
         .film-strip::after { bottom: 8px; }
-
         .film-track {
             display: flex;
             width: max-content;
             animation: scrollFilm 90s linear infinite;
         }
-
-        /* 鼠标悬停暂停滚动 */
         .film-track:hover { animation-play-state: paused; }
-
-        .film-group {
-            display: flex;
-            gap: 25px;
-            padding-right: 25px;
-        }
-
+        .film-group { display: flex; gap: 25px; padding-right: 25px; }
         .film-frame {
             background: #fdfdfd;
             padding: 10px 10px 25px 10px;
@@ -137,51 +201,78 @@
             cursor: pointer;
             flex-shrink: 0;
         }
-
         .film-frame:hover { transform: scale(1.05) rotate(1deg); z-index: 10; }
-
         .film-frame img {
-            width: 280px;
-            height: 190px;
-            object-fit: cover;
-            display: block;
+            width: 280px; height: 190px; object-fit: cover; display: block;
             filter: sepia(10%) contrast(105%);
         }
+        @keyframes scrollFilm { 100% { transform: translateX(-50%); } }
 
-        @keyframes scrollFilm {
-            100% { transform: translateX(-50%); }
-        }
-        /* ================================================= */
-
-        /* Modal 弹窗 */
+        /* ========== 模态框（媒体查看器） ========== */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0;
-            width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px); align-items: center; justify-content: center;
+            width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(6px); align-items: center; justify-content: center;
             opacity: 0; transition: opacity 0.3s ease;
         }
         .modal.show { display: flex; opacity: 1; }
         .modal-content {
-            background-color: #fff; padding: 30px; border-radius: 16px;
-            width: 90%; max-width: 800px; max-height: 85vh; overflow-y: auto;
+            background-color: #fff; padding: 28px; border-radius: 16px;
+            width: 92%; max-width: 900px; max-height: 88vh; overflow-y: auto;
             position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .close-btn {
-            position: absolute; top: 15px; right: 20px; color: var(--text-light);
-            font-size: 30px; font-weight: bold; cursor: pointer; transition: color 0.2s;
+            position: absolute; top: 12px; right: 18px; color: var(--text-light);
+            font-size: 32px; font-weight: bold; cursor: pointer; transition: color 0.2s;
+            line-height: 1; z-index: 10;
         }
         .close-btn:hover { color: #d9534f; }
-        .modal-content h2 { border-bottom: 2px solid var(--bg-color); margin-bottom: 20px; font-size: 1.5em; }
-        .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-        .photo-grid img {
-            width: 100%; height: 200px; object-fit: cover; border-radius: 8px;
-            transition: transform 0.3s ease; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        .modal-content h2 {
+            border-bottom: 2px solid var(--bg-color); margin-bottom: 20px; font-size: 1.5em;
+            padding-right: 40px;
         }
-        .photo-grid img:hover { transform: scale(1.03); }
+
+        /* 单个媒体查看器内容 */
+        #mediaModalBody {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+        }
+        #mediaModalBody img,
+        #mediaModalBody video {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+            background: #000;
+        }
+        #mediaModalBody video { width: 100%; }
+
+        /* 全部媒体网格 */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .photo-grid .grid-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .photo-grid .grid-item img {
+            width: 100%; height: 200px; object-fit: cover; display: block;
+            transition: transform 0.3s ease;
+        }
+        .photo-grid .grid-item:hover img { transform: scale(1.04); }
+        .photo-grid .grid-item .play-badge {
+            width: 40px; height: 40px; font-size: 16px;
+        }
 
         footer { text-align: center; padding: 20px; color: var(--text-light); font-size: 0.9em; }
 
-        /* 手机端适配 */
         @media (max-width: 768px) {
             .grid-2 { grid-template-columns: 1fr; }
             h1 { font-size: 2.2em; }
@@ -193,9 +284,10 @@
             .leaf-right, .leaf-left { margin-top: -10px; }
             .modal-content { padding: 20px; }
             .photo-grid { grid-template-columns: 1fr 1fr; }
-            .photo-grid img { height: 150px; }
+            .photo-grid .grid-item img { height: 150px; }
             .film-frame img { width: 220px; height: 150px; }
             .film-track { animation-duration: 45s; }
+            .media-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
         }
     </style>
 </head>
@@ -214,7 +306,7 @@
                 <svg class="leaf leaf-left" viewBox="0 0 24 24"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.5,17.5 6,17.5C9.5,17.5 12.5,14.5 14.5,11.5C15.5,10 16.5,8.5 17,8Z"/></svg>
                 <svg class="leaf leaf-tl" viewBox="0 0 24 24"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.5,17.5 6,17.5C9.5,17.5 12.5,14.5 14.5,11.5C15.5,10 16.5,8.5 17,8Z"/></svg>
             </div>
-            
+
             <h1>Sihan Wu (Sabrina)</h1>
             <div class="subtitle">Camp Counselor • Outdoor Enthusiast • CS Major</div>
             <div class="keywords">
@@ -223,20 +315,19 @@
                 <span class="tag">Coachable</span>
                 <span class="tag">Sports & Outdoor Enthusiast</span>
                 <span class="tag">Photography & Music</span>
-                <span class="tag">Arts & Crafts</span>
                 <span class="tag">Independent traveler(30+ cities)</span>
             </div>
         </header>
 
-        <!-- 1. About Me -->
         <section>
             <h2>About Me</h2>
             <p>Computer Science student from Xiangtan University with an Emergency Management minor, but my real classroom has been the outdoors. I’ve spent two summers as a camp counselor and logged solo ascents on seven 5,000m+ mountains. I’m an ENFP who loves leading small groups, bringing energy to a rainy day, and noticing the quiet kid in the back. I combine outdoor survival skills, youth counseling experience, and a love for photography and music to help campers grow.</p>
         </section>
 
-        <!-- 2. Outdoor & Skills（已移到 About Me 下面） -->
+        <!-- ================= Outdoor & Skills（含媒体卡片） ================= -->
         <section>
             <h2>Outdoor & Skills</h2>
+
             <div class="grid-2">
                 <div class="highlight-box">
                     <h3>Wilderness Experience</h3>
@@ -256,15 +347,171 @@
                     </ul>
                 </div>
             </div>
+
+            <h3 class="media-subhead">See It in Action <span class="hint">— click a card to view photo or video</span></h3>
+
+            <div class="media-grid" id="mediaGrid">
+                <!-- 视频卡片 -->
+                <div class="media-card" data-category="kpop">
+                    <div class="media-thumb">
+                        <img src="thumbs/kpop.jpg" alt="K-pop Dance">
+                        <div class="play-badge">▶</div>
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Video</span>
+                        <span class="media-name">K-pop Dance</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="ukulele">
+                    <div class="media-thumb">
+                        <img src="thumbs/ukulele.jpg" alt="Ukulele">
+                        <div class="play-badge">▶</div>
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Video</span>
+                        <span class="media-name">Ukulele</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="musicfilm">
+                    <div class="media-thumb">
+                        <img src="thumbs/musicfilm.jpg" alt="High School Music Short Film">
+                        <div class="play-badge">▶</div>
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Video</span>
+                        <span class="media-name">High School Music Short Film</span>
+                    </div>
+                </div>
+
+                <!-- 照片卡片 -->
+                <div class="media-card" data-category="climbing">
+                    <div class="media-thumb">
+                        <img src="thumbs/climbing.jpg" alt="Rock Climbing">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Rock Climbing</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="track">
+                    <div class="media-thumb">
+                        <img src="thumbs/track.jpg" alt="Track & Field">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Track & Field</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="basketball">
+                    <div class="media-thumb">
+                        <img src="thumbs/basketball.jpg" alt="Basketball">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Basketball</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="snowmountain">
+                    <div class="media-thumb">
+                        <img src="thumbs/snowmountain.jpg" alt="Snow Mountains">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Snow Mountains</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="swimming">
+                    <div class="media-thumb">
+                        <img src="thumbs/swimming.jpg" alt="Swimming">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Swimming</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="naturephoto">
+                    <div class="media-thumb">
+                        <img src="thumbs/naturephoto.jpg" alt="Nature Photography">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Nature Photography</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="rafting">
+                    <div class="media-thumb">
+                        <img src="thumbs/rafting.jpg" alt="Rafting">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Rafting</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="archery">
+                    <div class="media-thumb">
+                        <img src="thumbs/archery.jpg" alt="Archery">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Archery</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="jungle">
+                    <div class="media-thumb">
+                        <img src="thumbs/jungle.jpg" alt="Jungle Survival">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Jungle Survival</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="treeclimbing">
+                    <div class="media-thumb">
+                        <img src="thumbs/treeclimbing.jpg" alt="Tree Climbing">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Tree Climbing</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="jungleexplore">
+                    <div class="media-thumb">
+                        <img src="thumbs/jungleexplore.jpg" alt="Jungle Exploration">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Jungle Exploration</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="wuzhen">
+                    <div class="media-thumb">
+                        <img src="thumbs/wuzhen.jpg" alt="Wuzhen Theatre Festival">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Wuzhen Theatre Festival</span>
+                    </div>
+                </div>
+                <div class="media-card" data-category="camping">
+                    <div class="media-thumb">
+                        <img src="thumbs/camping.jpg" alt="Wilderness Camping">
+                    </div>
+                    <div class="media-info">
+                        <span class="media-type">Photo</span>
+                        <span class="media-name">Wilderness Camping</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="gallery-btn-wrapper">
                 <button id="openGalleryBtn" class="gallery-btn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                    View Full Photo Album
+                    View All Media
                 </button>
             </div>
         </section>
 
-        <!-- 3. Camp & Youth Leadership（已移到 Outdoor & Skills 下面） -->
+        <!-- Camp & Youth Leadership -->
         <section>
             <h2>Camp & Youth Leadership</h2>
             <div class="exp-item">
@@ -273,7 +520,7 @@
                 <ul>
                     <li>Served as a consistent, caring adult for left-behind children, many of whom hadn't seen their parents in years.</li>
                     <li>Read emotional cues and adjusted my approach for campers who withdrew or went quiet; prioritized the person over the schedule.</li>
-                    <li>Built a predictable, safe group environment through simpl rituals: check-ins, small jobs, and naming small wins out loud.</li>
+                    <li>Built a predictable, safe group environment through simple rituals: check-ins, small jobs, and naming small wins out loud.</li>
                     <li>Handled conflict by listening first, separating the schedule from the person, and getting the team on the same page quickly.</li>
                 </ul>
             </div>
@@ -289,14 +536,13 @@
             </div>
         </section>
 
-        <!-- 4. Photography Portfolio -->
+        <!-- Photography Portfolio -->
         <section>
             <h2>Photography Portfolio</h2>
-            <p style="margin-bottom: 20px; color: #666;">A collection of candid moments — ^o^from genuine smiles of children to atmospheric landscapes. (Hover to pause)</p>
-            
+            <p style="margin-bottom: 20px; color: #666;">A collection of candid moments — from genuine smiles of children to atmospheric landscapes. (Hover to pause)</p>
+
             <div class="film-strip">
                 <div class="film-track">
-                    <!-- 第一组照片 -->
                     <div class="film-group">
                         <div class="film-frame"><img src="portfolio1.jpg" alt=""></div>
                         <div class="film-frame"><img src="portfolio2.jpg" alt=""></div>
@@ -314,7 +560,6 @@
                         <div class="film-frame"><img src="portfolio14.jpg" alt=""></div>
                         <div class="film-frame"><img src="portfolio15.jpg" alt=""></div>
                     </div>
-                    <!-- 第二组照片（与第一组完全一致，用于无缝滚动） -->
                     <div class="film-group">
                         <div class="film-frame"><img src="portfolio1.jpg" alt=""></div>
                         <div class="film-frame"><img src="portfolio2.jpg" alt=""></div>
@@ -342,32 +587,202 @@
         </footer>
     </div>
 
-    <!-- 相册弹窗 (Modal) -->
+    <!-- 单个媒体查看器 -->
+    <div id="mediaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="mediaCloseBtn">&times;</span>
+            <h2 id="mediaModalTitle"></h2>
+            <div id="mediaModalBody"></div>
+        </div>
+    </div>
+
+    <!-- 全部媒体网格 -->
     <div id="galleryModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>My Camp & Outdoor Adventures</h2>
-            <div class="photo-grid">
-                <img src="gallery1.jpg" alt="">
-                <img src="gallery2.jpg" alt="">
-                <img src="gallery3.jpg" alt="">
-                <img src="gallery4.jpg" alt="">
-                <img src="gallery5.jpg" alt="">
-                <img src="gallery6.jpg" alt="">
-            </div>
+            <span class="close-btn" id="galleryCloseBtn">&times;</span>
+            <h2>All Photos & Videos</h2>
+            <div class="photo-grid" id="galleryGrid"></div>
         </div>
     </div>
 
     <script>
-        const modal = document.getElementById("galleryModal");
-        const btn = document.getElementById("openGalleryBtn");
-        const closeBtn = document.querySelector(".close-btn");
+        /* =========================================================
+           媒体库：把所有文件路径集中在这里，方便替换
+           type: "video" | "photo"
+           thumb: 卡片缩略图（视频可用视频截图）
+           items: 点击后展示的媒体（可多张照片）
+        ========================================================= */
+        const mediaLibrary = {
+            kpop: {
+                title: "K-pop Dance",
+                thumb: "thumbs/kpop.jpg",
+                items: [{ type: "video", src: "videos/kpop.mp4" }]
+            },
+            ukulele: {
+                title: "Ukulele",
+                thumb: "thumbs/ukulele.jpg",
+                items: [{ type: "video", src: "videos/ukulele.mp4" }]
+            },
+            musicfilm: {
+                title: "High School Music Short Film",
+                thumb: "thumbs/musicfilm.jpg",
+                items: [{ type: "video", src: "videos/musicfilm.mp4" }]
+            },
+            climbing: {
+                title: "Rock Climbing",
+                thumb: "thumbs/climbing.jpg",
+                items: [
+                    { type: "photo", src: "photos/climbing1.jpg" },
+                    { type: "photo", src: "photos/climbing2.jpg" }
+                ]
+            },
+            track: {
+                title: "Track & Field",
+                thumb: "thumbs/track.jpg",
+                items: [{ type: "photo", src: "photos/track.jpg" }]
+            },
+            basketball: {
+                title: "Basketball",
+                thumb: "thumbs/basketball.jpg",
+                items: [{ type: "photo", src: "photos/basketball.jpg" }]
+            },
+            snowmountain: {
+                title: "Snow Mountains",
+                thumb: "thumbs/snowmountain.jpg",
+                items: [
+                    { type: "photo", src: "photos/snowmountain1.jpg" },
+                    { type: "photo", src: "photos/snowmountain2.jpg" }
+                ]
+            },
+            swimming: {
+                title: "Swimming",
+                thumb: "thumbs/swimming.jpg",
+                items: [{ type: "photo", src: "photos/swimming.jpg" }]
+            },
+            naturephoto: {
+                title: "Nature Photography",
+                thumb: "thumbs/naturephoto.jpg",
+                items: [{ type: "photo", src: "photos/naturephoto.jpg" }]
+            },
+            rafting: {
+                title: "Rafting",
+                thumb: "thumbs/rafting.jpg",
+                items: [{ type: "photo", src: "photos/rafting.jpg" }]
+            },
+            archery: {
+                title: "Archery",
+                thumb: "thumbs/archery.jpg",
+                items: [{ type: "photo", src: "photos/archery.jpg" }]
+            },
+            jungle: {
+                title: "Jungle Survival",
+                thumb: "thumbs/jungle.jpg",
+                items: [{ type: "photo", src: "photos/jungle.jpg" }]
+            },
+            treeclimbing: {
+                title: "Tree Climbing",
+                thumb: "thumbs/treeclimbing.jpg",
+                items: [{ type: "photo", src: "photos/treeclimbing.jpg" }]
+            },
+            jungleexplore: {
+                title: "Jungle Exploration",
+                thumb: "thumbs/jungleexplore.jpg",
+                items: [{ type: "photo", src: "photos/jungleexplore.jpg" }]
+            },
+            wuzhen: {
+                title: "Wuzhen Theatre Festival",
+                thumb: "thumbs/wuzhen.jpg",
+                items: [{ type: "photo", src: "photos/wuzhen.jpg" }]
+            },
+            camping: {
+                title: "Wilderness Camping",
+                thumb: "thumbs/camping.jpg",
+                items: [{ type: "photo", src: "photos/camping.jpg" }]
+            }
+        };
 
-        btn.onclick = function() { modal.classList.add("show"); }
-        closeBtn.onclick = function() { modal.classList.remove("show"); }
-        window.onclick = function(event) {
-            if (event.target == modal) { modal.classList.remove("show"); }
+        /* ---------- 打开单个媒体 ---------- */
+        const mediaModal = document.getElementById("mediaModal");
+        const mediaModalTitle = document.getElementById("mediaModalTitle");
+        const mediaModalBody = document.getElementById("mediaModalBody");
+        const mediaCloseBtn = document.getElementById("mediaCloseBtn");
+
+        function openMedia(category) {
+            const data = mediaLibrary[category];
+            if (!data) return;
+
+            mediaModalTitle.textContent = data.title;
+            mediaModalBody.innerHTML = "";
+
+            data.items.forEach(item => {
+                if (item.type === "video") {
+                    const video = document.createElement("video");
+                    video.src = item.src;
+                    video.controls = true;
+                    video.playsInline = true;
+                    video.preload = "metadata";
+                    mediaModalBody.appendChild(video);
+                } else {
+                    const img = document.createElement("img");
+                    img.src = item.src;
+                    img.alt = data.title;
+                    mediaModalBody.appendChild(img);
+                }
+            });
+
+            mediaModal.classList.add("show");
         }
+
+        document.querySelectorAll(".media-card").forEach(card => {
+            card.addEventListener("click", () => openMedia(card.dataset.category));
+        });
+
+        mediaCloseBtn.onclick = () => mediaModal.classList.remove("show");
+        mediaModal.addEventListener("click", e => {
+            if (e.target === mediaModal) mediaModal.classList.remove("show");
+        });
+
+        /* ---------- 打开全部媒体网格 ---------- */
+        const galleryModal = document.getElementById("galleryModal");
+        const galleryGrid = document.getElementById("galleryGrid");
+        const galleryCloseBtn = document.getElementById("galleryCloseBtn");
+        const openGalleryBtn = document.getElementById("openGalleryBtn");
+
+        function buildGallery() {
+            galleryGrid.innerHTML = "";
+            Object.keys(mediaLibrary).forEach(key => {
+                const data = mediaLibrary[key];
+                const first = data.items[0];
+                const item = document.createElement("div");
+                item.className = "grid-item";
+                item.innerHTML = `
+                    <img src="${data.thumb}" alt="${data.title}">
+                    ${first.type === "video" ? '<div class="play-badge">▶</div>' : ""}
+                `;
+                item.addEventListener("click", () => {
+                    galleryModal.classList.remove("show");
+                    openMedia(key);
+                });
+                galleryGrid.appendChild(item);
+            });
+        }
+
+        openGalleryBtn.onclick = () => {
+            buildGallery();
+            galleryModal.classList.add("show");
+        };
+        galleryCloseBtn.onclick = () => galleryModal.classList.remove("show");
+        galleryModal.addEventListener("click", e => {
+            if (e.target === galleryModal) galleryModal.classList.remove("show");
+        });
+
+        /* ESC 关闭 */
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape") {
+                mediaModal.classList.remove("show");
+                galleryModal.classList.remove("show");
+            }
+        });
     </script>
 </body>
 </html>
