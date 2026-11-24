@@ -116,7 +116,6 @@
         .film-track {
             display: flex;
             width: max-content;
-            /* 修改点：因为照片增加到15张，时长从 35s 调整为 90s，滚动更从容 */
             animation: scrollFilm 90s linear infinite;
         }
 
@@ -126,12 +125,12 @@
         .film-group {
             display: flex;
             gap: 25px;
-            padding-right: 25px; /* 保证无缝衔接 */
+            padding-right: 25px;
         }
 
         .film-frame {
             background: #fdfdfd;
-            padding: 10px 10px 25px 10px; /* 宝丽来风格的白边 */
+            padding: 10px 10px 25px 10px;
             border-radius: 2px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
             transition: transform 0.3s ease;
@@ -146,7 +145,7 @@
             height: 190px;
             object-fit: cover;
             display: block;
-            filter: sepia(10%) contrast(105%); /* 轻微胶片滤镜 */
+            filter: sepia(10%) contrast(105%);
         }
 
         @keyframes scrollFilm {
@@ -195,9 +194,7 @@
             .modal-content { padding: 20px; }
             .photo-grid { grid-template-columns: 1fr 1fr; }
             .photo-grid img { height: 150px; }
-            /* 手机端胶卷尺寸调小 */
             .film-frame img { width: 220px; height: 150px; }
-            /* 修改点：手机端滚动时长稍微加快一点 */
             .film-track { animation-duration: 45s; }
         }
     </style>
@@ -230,36 +227,13 @@
             </div>
         </header>
 
+        <!-- 1. About Me -->
         <section>
             <h2>About Me</h2>
             <p>Computer Science student from Xiangtan University with an Emergency Management minor, but my real classroom has been the outdoors. I’ve spent two summers as a camp counselor and logged solo ascents on seven 5,000m+ mountains. I’m an ENFP who loves leading small groups, bringing energy to a rainy day, and noticing the quiet kid in the back. I combine outdoor survival skills, youth counseling experience, and a love for photography and music to help campers grow.</p>
         </section>
 
-        <section>
-            <h2>Camp & Youth Leadership</h2>
-            <div class="exp-item">
-                <div class="exp-title">Camp Counselor <span>Summer 2026</span></div>
-                <div class="exp-location">[Nonprofit Rural Childcare Camp] — Kunming, China</div>
-                <ul>
-                    <li>Served as a consistent, caring adult for left-behind children, many of whom hadn't seen their parents in years.</li>
-                    <li>Read emotional cues and adjusted my approach for campers who withdrew or went quiet; prioritized the person over the schedule.</li>
-                    <li>Built a predictable, safe group environment through simpl rituals: check-ins, small jobs, and naming small wins out loud.</li>
-                    <li>Handled conflict by listening first, separating the schedule from the person, and getting the team on the same page quickly.</li>
-                </ul>
-            </div>
-            <div class="exp-item">
-                <div class="exp-title">Counselor <span>Summer 2025</span></div>
-                <div class="exp-location">[Community Outdoor Exploration Camp] — Kunming, China</div>
-                <ul>
-                    <li>Led daily hands-on experiments (plastic bottle cars, pinhole cameras) and beginner music (tongue drum, ukulele, piano).</li>
-                    <li>Turned failed builds into "why didn't it work?" challenges, helping campers debug and try again rather than rescuing them.</li>
-                    <li>Progressed groups through "exploration maps": park hikes → climbing wall → low-elevation mountain hikes → camping.</li>
-                    <li>Managed gear checks, group pacing, weather awareness, and stayed calm when plans changed.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- 户外与技能 -->
+        <!-- 2. Outdoor & Skills（已移到 About Me 下面） -->
         <section>
             <h2>Outdoor & Skills</h2>
             <div class="grid-2">
@@ -289,7 +263,32 @@
             </div>
         </section>
 
-        <!-- 胶卷摄影展示栏 -->
+        <!-- 3. Camp & Youth Leadership（已移到 Outdoor & Skills 下面） -->
+        <section>
+            <h2>Camp & Youth Leadership</h2>
+            <div class="exp-item">
+                <div class="exp-title">Camp Counselor <span>Summer 2026</span></div>
+                <div class="exp-location">[Nonprofit Rural Childcare Camp] — Kunming, China</div>
+                <ul>
+                    <li>Served as a consistent, caring adult for left-behind children, many of whom hadn't seen their parents in years.</li>
+                    <li>Read emotional cues and adjusted my approach for campers who withdrew or went quiet; prioritized the person over the schedule.</li>
+                    <li>Built a predictable, safe group environment through simpl rituals: check-ins, small jobs, and naming small wins out loud.</li>
+                    <li>Handled conflict by listening first, separating the schedule from the person, and getting the team on the same page quickly.</li>
+                </ul>
+            </div>
+            <div class="exp-item">
+                <div class="exp-title">Counselor <span>Summer 2025</span></div>
+                <div class="exp-location">[Community Outdoor Exploration Camp] — Kunming, China</div>
+                <ul>
+                    <li>Led daily hands-on experiments (plastic bottle cars, pinhole cameras) and beginner music (tongue drum, ukulele, piano).</li>
+                    <li>Turned failed builds into "why didn't it work?" challenges, helping campers debug and try again rather than rescuing them.</li>
+                    <li>Progressed groups through "exploration maps": park hikes → climbing wall → low-elevation mountain hikes → camping.</li>
+                    <li>Managed gear checks, group pacing, weather awareness, and stayed calm when plans changed.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 4. Photography Portfolio -->
         <section>
             <h2>Photography Portfolio</h2>
             <p style="margin-bottom: 20px; color: #666;">A collection of candid moments — ^o^from genuine smiles of children to atmospheric landscapes. (Hover to pause)</p>
