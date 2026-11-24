@@ -8,34 +8,28 @@
     <style>
         :root {
             --primary: #2E5C4E;
-            --bg-color: #F4F7F5; /* 底色稍微调深/冷一点，衬托白色卡片 */
+            --bg-color: #F4F7F5;
             --text-main: #333333;
             --text-light: #666666;
-            --card-bg: #FFFDFC; /* 卡片纸质感底色 */
+            --card-bg: #FFFDFC;
             --border-color: #D8E5DD;
         }
 
-        /* ================= 全局鼠标光标：极简小松树 ================= */
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
-            /* 手账本圆点纹理 */
             background-image: radial-gradient(#C9D8CE 1.5px, transparent 1.5px);
             background-size: 24px 24px;
             color: var(--text-main);
             line-height: 1.6;
-            
-            /* 极简小松树光标。如果觉得奇怪，把下面这行 cursor 删掉，就会恢复默认箭头 */
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 L28 18 L4 18 Z' fill='%234A8B6F'/%3E%3Cpath d='M16 10 L24 24 L8 24 Z' fill='%232E5C4E'/%3E%3Crect x='14' y='24' width='4' height='6' fill='%23A0522D' rx='1'/%3E%3C/svg%3E") 16 16, auto;
         }
 
-        /* 美化滚动条 */
         ::-webkit-scrollbar { width: 12px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: #9CB8A9; border-radius: 6px; border: 3px solid var(--bg-color); }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
-        /* 可点击的链接和按钮恢复默认手势 */
         a, button, .tag, .filter-btn, .polaroid, .photo-card, .film-frame, .lb-nav, .lb-close {
             cursor: pointer;
         }
@@ -44,11 +38,10 @@
 
         .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
 
-        /* ================= 升级版头部 ================= */
         header {
             text-align: center;
             padding: 70px 20px 50px;
-            background: 
+            background:
                 radial-gradient(circle at 50% 120%, rgba(46, 92, 78, 0.12) 0%, transparent 60%),
                 radial-gradient(circle at 10% 20%, rgba(200, 230, 210, 0.4) 0%, transparent 40%),
                 linear-gradient(180deg, #E8F0EC 0%, #F4F8F6 100%);
@@ -86,7 +79,6 @@
 
         header > * { position: relative; z-index: 2; }
 
-        /* 四周漂浮的装饰小图标 */
         .floating-icon {
             position: absolute;
             font-size: 1.8em;
@@ -109,11 +101,10 @@
             100% { transform: translateY(-15px) rotate(10deg) scale(1.1); }
         }
 
-        /* 头像与呼吸光晕 */
         .photo-wrapper { position: relative; display: inline-block; margin-bottom: 25px; padding: 15px; z-index: 3; }
         .profile-pic {
             width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
-            border: 5px solid #fff; 
+            border: 5px solid #fff;
             position: relative;
             z-index: 2;
             display: block;
@@ -143,11 +134,11 @@
         .leaf-left   { top: 50%; left: -10px; margin-top: -13px; transform: rotate(315deg); fill: #4A8B6F; }
         .leaf-tl     { top: 15px; left: -5px; transform: rotate(0deg); fill: #2E5C4E; }
 
-        h1 { 
-            font-family: 'Lora', serif; 
-            font-size: 3.2em; 
-            color: var(--primary); 
-            margin-bottom: 8px; 
+        h1 {
+            font-family: 'Lora', serif;
+            font-size: 3.2em;
+            color: var(--primary);
+            margin-bottom: 8px;
             letter-spacing: -0.5px;
             text-shadow: 1px 2px 4px rgba(255,255,255,0.8);
             position: relative;
@@ -162,26 +153,41 @@
             opacity: 0.8;
         }
 
-        .subtitle { 
-            font-size: 1.15em; 
-            color: #4A6B5D; 
+        .subtitle {
+            font-size: 1.15em;
+            color: #4A6B5D;
             font-weight: 600;
-            margin-bottom: 25px; 
+            margin-bottom: 18px;
             letter-spacing: 1.5px;
-            text-transform: uppercase; 
+            text-transform: uppercase;
         }
 
-        /* 丰富一点的标签 */
+        /* 新增：可用性信息条 */
+        .availability-line {
+            display: inline-block;
+            margin: 0 auto 22px;
+            padding: 8px 22px;
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.95);
+            border-radius: 999px;
+            color: var(--primary);
+            font-size: 0.88em;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            box-shadow: 0 3px 12px rgba(46,92,78,0.08);
+        }
+
         .keywords { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
         .tag {
-            background-color: rgba(255, 255, 255, 0.85); 
+            background-color: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
-            color: var(--primary); 
-            padding: 8px 18px; 
+            color: var(--primary);
+            padding: 8px 18px;
             border-radius: 24px;
-            font-size: 0.9em; 
-            font-weight: 600; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04); 
+            font-size: 0.9em;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
             border: 1px solid rgba(255,255,255,0.9);
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -192,21 +198,18 @@
             color: #1E4035;
         }
 
-        /* ================= Sections：手账卡片风 ================= */
         section {
-            background-color: var(--card-bg); 
-            padding: 45px 40px; 
+            background-color: var(--card-bg);
+            padding: 45px 40px;
             border-radius: 16px;
-            margin-bottom: 40px; 
+            margin-bottom: 40px;
             position: relative;
-            /* 双层边框 + 立体阴影 */
             border: 1px solid var(--border-color);
-            box-shadow: 
-                0 4px 0 rgba(46, 92, 78, 0.03), 
+            box-shadow:
+                0 4px 0 rgba(46, 92, 78, 0.03),
                 0 15px 30px rgba(0,0,0,0.04);
         }
 
-        /* 卡片左上角的手账胶带 */
         section::before {
             content: '';
             position: absolute;
@@ -222,7 +225,6 @@
             z-index: 5;
         }
 
-        /* 卡片顶部的绿色细线 */
         section::after {
             content: '';
             position: absolute;
@@ -232,10 +234,9 @@
             border-radius: 0 0 4px 4px;
         }
 
-        /* 标题的高亮笔刷效果 */
         h2 {
-            font-family: 'Lora', serif; 
-            color: var(--primary); 
+            font-family: 'Lora', serif;
+            color: var(--primary);
             font-size: 1.6em;
             display: inline-block;
             position: relative;
@@ -247,7 +248,7 @@
             position: absolute;
             left: -4px; right: -4px; bottom: 2px;
             height: 10px;
-            background-color: #E1EDE6; /* 浅绿荧光笔 */
+            background-color: #E1EDE6;
             border-radius: 4px;
             z-index: -1;
             transform: rotate(-1deg);
@@ -260,19 +261,37 @@
         ul { padding-left: 20px; margin-top: 10px; }
         li { margin-bottom: 8px; color: #444; }
 
-        /* 技能框丰富化 */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 35px; }
-        .highlight-box { 
-            background-color: #F8FBF9; 
-            padding: 25px; 
-            border-radius: 12px; 
+        .highlight-box {
+            background-color: #F8FBF9;
+            padding: 25px;
+            border-radius: 12px;
             border: 1px solid #DCE8E2;
             border-left: 5px solid var(--primary);
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.01), 0 4px 10px rgba(46,92,78,0.03);
         }
         .highlight-box h3 { color: var(--primary); margin-bottom: 12px; font-size: 1.15em; display: flex; align-items: center; gap: 8px; }
 
-        /* ================= 动态互动技能展示 ================= */
+        /* 新增：Honors & Leadership 卡片样式 */
+        .honors-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .honors-list li {
+            background: #F8FBF9;
+            border-left: 4px solid var(--primary);
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin: 0;
+            font-size: 0.95em;
+            color: #333;
+            box-shadow: 0 2px 6px rgba(46,92,78,0.04);
+        }
+        .honors-list li strong { color: var(--primary); }
+
         .media-subhead {
             font-family: 'Lora', serif;
             color: var(--primary);
@@ -332,7 +351,6 @@
         }
         .photo-card:hover .caption { opacity: 1; transform: translateY(0); }
 
-        /* ================= 心形拍立得墙 ================= */
         .heart-gallery-container {
             position: relative; width: 100%; height: 450px; max-width: 800px; margin: 0 auto;
         }
@@ -355,7 +373,6 @@
             100% { margin-top: 8px; }
         }
 
-        /* ================= 胶卷相册 ================= */
         .film-strip {
             background-color: #111; padding: 35px 0; position: relative;
             overflow: hidden; border-radius: 12px; box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
@@ -379,7 +396,6 @@
         .film-frame img { width: 280px; height: 190px; object-fit: cover; display: block; filter: sepia(10%) contrast(105%); }
         @keyframes scrollFilm { 100% { transform: translateX(-50%); } }
 
-        /* ================= 灯箱 ================= */
         .lightbox {
             display: none; position: fixed; z-index: 1000; inset: 0;
             background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(8px);
@@ -414,7 +430,6 @@
 
         footer { text-align: center; padding: 20px; color: var(--text-light); font-size: 0.9em; }
 
-        /* ================= 响应式适配 ================= */
         @media (max-width: 768px) {
             .grid-2 { grid-template-columns: 1fr; }
             h1 { font-size: 2.2em; }
@@ -434,11 +449,14 @@
             .lb-prev { left: 6px; }
             .lb-next { right: 6px; }
             .lb-close { top: -40px; right: 0; font-size: 30px; }
-            
+
             .heart-gallery-container { height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
             .polaroid { position: relative; left: auto; top: auto; width: 100%; transform: none; animation: none; }
             .polaroid img { height: 120px; }
             .polaroid:hover { transform: scale(1.02) rotate(2deg); }
+
+            .honors-list { grid-template-columns: 1fr; }
+            .availability-line { font-size: 0.8em; padding: 7px 16px; }
         }
     </style>
 </head>
@@ -446,7 +464,6 @@
 
     <div class="container">
         <header>
-            <!-- 散布的艺术和户外小图标 -->
             <span class="floating-icon icon-1">🏕️</span>
             <span class="floating-icon icon-2">🎸</span>
             <span class="floating-icon icon-3">🎨</span>
@@ -471,6 +488,10 @@
 
             <h1>Sihan Wu (Sabrina)</h1>
             <div class="subtitle">Camp Counselor • Outdoor Enthusiast • CS Major</div>
+
+            <!-- 新增：可用性 + 排名 -->
+            <p class="availability-line">Available June 1 – August 25, 2027 · Age 21 · Ranked Top 30% in Comprehensive Evaluation (Freshman Year)</p>
+
             <div class="keywords">
                 <span class="tag">🌱 ENFP</span>
                 <span class="tag">🧸 Child-friendly</span>
@@ -484,7 +505,7 @@
 
         <section>
             <h2>About Me</h2>
-            <p>I’m a sophomore studying Computer Science at Xiangtan University. My passion lives outdoors. I’ve been a camp counselor for two summers, solo-traveled to 30+ cities, and climbed multiple high-altitude peaks. As an ENFP, I’m all about bringing high energy, building tight-knit groups, and having a radar for the quiet kid who might feel left out. I love blending outdoor survival skills, youth leadership, photography, and music to create a space where campers can genuinely grow.
+            <p>I’m a sophomore studying Computer Science at Xiangtan University. My passion lives outdoors. I’ve been a camp counselor for two summers, solo-traveled to 30+ cities, and climbed multiple high-altitude peaks. As an ENFP, I’m all about bringing high energy, building tight-knit groups, and having a radar for the quiet kid who might feel left out. I love blending outdoor survival skills, youth leadership, photography, and music to create a space where campers can genuinely grow. I tend to be patient and consistent rather than loud, and I’m at my best with kids who need a steady adult in their corner.
             <br><br>
             Follow my everyday moments on Instagram: <strong>@Sabrinao3o_5353</strong></p>
         </section>
@@ -507,7 +528,8 @@
                     <ul>
                         <li><strong>Media & Arts:</strong> Photography (Canon 60D), crafts, ukulele singing/playing, K-pop, video editing, Chinese Guzheng, elephant foot drum, tongue drum...</li>
                         <li><strong>Sports:</strong> Basketball, badminton, track & field, swimming, archery, horseback riding, mountain biking, skateboarding, rock climbing.</li>
-                        <li><strong>Certifications:</strong> CPR/AED certified; highly willing to complete other wilderness first aid training.</li>
+                        <li><strong>Certifications:</strong> CPR/AED certified; willing to complete Wilderness First Aid before start date.</li>
+                        <li><strong>Driver’s License:</strong> In progress — Subjects 1 &amp; 2 passed; full license expected January 2027.</li>
                         <li><strong>Physical:</strong> Consistent with aerobic exercise, strong endurance.</li>
                         <li><strong>Youth Leadership:</strong> Active listening, creating a sense of belonging, and guiding kids through disagreements with patience.</li>
                     </ul>
@@ -516,7 +538,6 @@
 
             <h3 class="media-subhead">See It in Action <span class="hint">— filter by category, click any photo to enlarge</span></h3>
 
-            <!-- 筛选按钮 -->
             <div class="filter-bar" id="filterBar">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="outdoor">Outdoor</button>
@@ -524,7 +545,6 @@
                 <button class="filter-btn" data-filter="arts">Arts & Music</button>
             </div>
 
-            <!-- 动态交互网格 -->
             <div class="dynamic-grid" id="photoWall"></div>
         </section>
 
@@ -532,33 +552,26 @@
         <section>
             <h2>Highlight Moments with Campers</h2>
             <p style="margin-bottom: 25px; color: #666; text-align: center;">Building connections, one small moment at a time.</p>
-            
+
             <div class="heart-gallery-container">
-                <!-- 照片1：左上角 -->
                 <div class="polaroid" style="--x: 25%; --y: 20%; --r: -8deg; --delay: 0s;">
                     <img src="kid1.jpg" alt="Camp memory 1">
                 </div>
-                <!-- 照片2：右上角 -->
                 <div class="polaroid" style="--x: 75%; --y: 20%; --r: 8deg; --delay: 0.5s;">
                     <img src="kid2.jpg" alt="Camp memory 2">
                 </div>
-                <!-- 照片3：左上偏中 -->
                 <div class="polaroid" style="--x: 15%; --y: 50%; --r: -4deg; --delay: 1s;">
                     <img src="kid3.jpg" alt="Camp memory 3">
                 </div>
-                <!-- 照片4：正中心 -->
                 <div class="polaroid" style="--x: 50%; --y: 55%; --r: 2deg; --delay: 0.3s;">
                     <img src="kid4.jpg" alt="Camp memory 4">
                 </div>
-                <!-- 照片5：右上偏中 -->
                 <div class="polaroid" style="--x: 85%; --y: 50%; --r: 6deg; --delay: 0.8s;">
                     <img src="kid5.jpg" alt="Camp memory 5">
                 </div>
-                <!-- 照片6：左下 -->
                 <div class="polaroid" style="--x: 30%; --y: 80%; --r: -6deg; --delay: 1.2s;">
                     <img src="kid6.jpg" alt="Camp memory 6">
                 </div>
-                <!-- 照片7：右下 -->
                 <div class="polaroid" style="--x: 70%; --y: 80%; --r: 5deg; --delay: 0.4s;">
                     <img src="kid7.jpg" alt="Camp memory 7">
                 </div>
@@ -570,7 +583,7 @@
             <h2>Camp & Youth Leadership</h2>
             <div class="exp-item">
                 <div class="exp-title">Camp Counselor <span>Summer 2026</span></div>
-                <div class="exp-location">[Nonprofit Rural Childcare Camp] — Kunming, China</div>
+                <div class="exp-location">[Nonprofit Rural Childcare Camp] — Songming, Kunming, Yunnan</div>
                 <ul>
                     <li>Served as a consistent, caring adult for left-behind children, many of whom hadn't seen their parents in years.</li>
                     <li>Read emotional cues and adjusted my approach for campers who withdrew or went quiet; prioritized the person over the schedule.</li>
@@ -580,7 +593,7 @@
             </div>
             <div class="exp-item">
                 <div class="exp-title">Camp Counselor <span>Summer 2025</span></div>
-                <div class="exp-location">[Community Outdoor Exploration Camp] — Kunming, China</div>
+                <div class="exp-location">[Community-Based Comprehensive Youth Development Camp] — Panlong, Kunming, Yunnan</div>
                 <ul>
                     <li>Led daily hands-on experiments (plastic bottle cars, pinhole cameras) and beginner music (tongue drum, ukulele, piano).</li>
                     <li>Turned failed builds into "why didn't it work?" challenges, helping campers debug and try again rather than rescuing them.</li>
@@ -588,6 +601,19 @@
                     <li>Managed gear checks, group pacing, weather awareness, and stayed calm when plans changed.</li>
                 </ul>
             </div>
+        </section>
+
+        <!-- 新增：Honors & Leadership -->
+        <section>
+            <h2>Honors & Leadership</h2>
+            <ul class="honors-list">
+                <li><strong>Outstanding Student Leader</strong></li>
+                <li><strong>Outstanding Volunteer Awards</strong> — Multiple Programs/Projects</li>
+                <li><strong>Captain</strong>, University Hosting/Emcee Team</li>
+                <li><strong>Head of Sports Department</strong>, Student Union</li>
+                <li><strong>Ranked Top 30%</strong> in Comprehensive Evaluation, Freshman Year</li>
+                <li><strong>Class Monitor</strong>, Middle School &amp; High School</li>
+            </ul>
         </section>
 
         <!-- Photography Portfolio -->
@@ -654,9 +680,6 @@
     </div>
 
     <script>
-        /* =========================================================
-           照片库：文件名请确保在根目录（和 index.html 同级）
-        ========================================================= */
         const photos = [
             { src: "kpop.jpg",            title: "K-pop Dance",              category: "arts" },
             { src: "ukulele.jpg",         title: "Ukulele",                  category: "arts" },
@@ -681,7 +704,7 @@
         const wall = document.getElementById("photoWall");
         const filterBar = document.getElementById("filterBar");
 
-        let visiblePhotos = []; 
+        let visiblePhotos = [];
         let currentIndex = 0;
 
         function renderWall(filter) {
