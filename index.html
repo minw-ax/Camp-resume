@@ -157,7 +157,6 @@
             font-weight: 700;
         }
 
-        /* 按钮 */
         .gallery-btn-wrapper { text-align: center; margin-top: 30px; }
         .gallery-btn {
             background-color: var(--primary); color: #fff; border: none; padding: 12px 30px;
@@ -208,7 +207,7 @@
         }
         @keyframes scrollFilm { 100% { transform: translateX(-50%); } }
 
-        /* ========== 模态框（媒体查看器） ========== */
+        /* ========== 模态框 ========== */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0;
             width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85);
@@ -232,24 +231,46 @@
             padding-right: 40px;
         }
 
-        /* 单个媒体查看器内容 */
         #mediaModalBody {
             display: flex;
             flex-direction: column;
             gap: 18px;
             align-items: center;
         }
-        #mediaModalBody img,
-        #mediaModalBody video {
+        #mediaModalBody .media-item {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #mediaModalBody img {
             max-width: 100%;
             max-height: 70vh;
             border-radius: 10px;
             box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-            background: #000;
         }
-        #mediaModalBody video { width: 100%; }
+        #mediaModalBody video {
+            width: 100%;
+            max-height: 70vh;
+            border-radius: 10px;
+            background: #000;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        }
+        .media-fallback {
+            width: 100%;
+            padding: 20px;
+            background: #FFF6F6;
+            border: 1px solid #F1C9C9;
+            border-radius: 10px;
+            color: #8B2E2E;
+        }
+        .media-fallback p { margin-bottom: 8px; font-size: 0.95em; }
+        .media-fallback a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: underline;
+        }
 
-        /* 全部媒体网格 */
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -324,7 +345,7 @@
             <p>Computer Science student from Xiangtan University with an Emergency Management minor, but my real classroom has been the outdoors. I’ve spent two summers as a camp counselor and logged solo ascents on seven 5,000m+ mountains. I’m an ENFP who loves leading small groups, bringing energy to a rainy day, and noticing the quiet kid in the back. I combine outdoor survival skills, youth counseling experience, and a love for photography and music to help campers grow.</p>
         </section>
 
-        <!-- ================= Outdoor & Skills（含媒体卡片） ================= -->
+        <!-- ================= Outdoor & Skills ================= -->
         <section>
             <h2>Outdoor & Skills</h2>
 
@@ -351,7 +372,6 @@
             <h3 class="media-subhead">See It in Action <span class="hint">— click a card to view photo or video</span></h3>
 
             <div class="media-grid" id="mediaGrid">
-                <!-- 视频卡片 -->
                 <div class="media-card" data-category="kpop">
                     <div class="media-thumb">
                         <img src="thumbs/kpop.jpg" alt="K-pop Dance">
@@ -382,8 +402,6 @@
                         <span class="media-name">High School Music Short Film</span>
                     </div>
                 </div>
-
-                <!-- 照片卡片 -->
                 <div class="media-card" data-category="climbing">
                     <div class="media-thumb">
                         <img src="thumbs/climbing.jpg" alt="Rock Climbing">
@@ -607,10 +625,10 @@
 
     <script>
         /* =========================================================
-           媒体库：把所有文件路径集中在这里，方便替换
+           媒体库：所有文件路径集中在这里
            type: "video" | "photo"
-           thumb: 卡片缩略图（视频可用视频截图）
-           items: 点击后展示的媒体（可多张照片）
+           thumb: 卡片缩略图（视频建议用视频截图）
+           items: 点击后展示的媒体
         ========================================================= */
         const mediaLibrary = {
             kpop: {
@@ -701,53 +719,95 @@
             }
         };
 
-        /* ---------- 打开单个媒体 ---------- */
+        /* ---------- 元素 ---------- */
         const mediaModal = document.getElementById("mediaModal");
         const mediaModalTitle = document.getElementById("mediaModalTitle");
         const mediaModalBody = document.getElementById("mediaModalBody");
         const mediaCloseBtn = document.getElementById("mediaCloseBtn");
 
-        function openMedia(category) {
-            const data = mediaLibrary[category];
-            if (!data) return;
-
-            mediaModalTitle.textContent = data.title;
-            mediaModalBody.innerHTML = "";
-
-            data.items.forEach(item => {
-                if (item.type === "video") {
-                    const video = document.createElement("video");
-                    video.src = item.src;
-                    video.controls = true;
-                    video.playsInline = true;
-                    video.preload = "metadata";
-                    mediaModalBody.appendChild(video);
-                } else {
-                    const img = document.createElement("img");
-                    img.src = item.src;
-                    img.alt = data.title;
-                    mediaModalBody.appendChild(img);
-                }
-            });
-
-            mediaModal.classList.add("show");
-        }
-
-        document.querySelectorAll(".media-card").forEach(card => {
-            card.addEventListener("click", () => openMedia(card.dataset.category));
-        });
-
-        mediaCloseBtn.onclick = () => mediaModal.classList.remove("show");
-        mediaModal.addEventListener("click", e => {
-            if (e.target === mediaModal) mediaModal.classList.remove("show");
-        });
-
-        /* ---------- 打开全部媒体网格 ---------- */
         const galleryModal = document.getElementById("galleryModal");
         const galleryGrid = document.getElementById("galleryGrid");
         const galleryCloseBtn = document.getElementById("galleryCloseBtn");
         const openGalleryBtn = document.getElementById("openGalleryBtn");
 
+        /* ---------- 释放当前媒体（暂停视频、清空 DOM） ---------- */
+        function releaseMedia() {
+            mediaModalBody.querySelectorAll("video").forEach(v => {
+                try { v.pause(); } catch (e) {}
+                v.removeAttribute("src");
+                v.load();
+            });
+            mediaModalBody.innerHTML = "";
+        }
+
+        /* ---------- 打开单个媒体 ---------- */
+        function openMedia(category) {
+            const data = mediaLibrary[category];
+            if (!data) return;
+
+            releaseMedia();
+            mediaModalTitle.textContent = data.title;
+
+            data.items.forEach(item => {
+                const wrapper = document.createElement("div");
+                wrapper.className = "media-item";
+
+                if (item.type === "video") {
+                    const video = document.createElement("video");
+                    video.controls = true;
+                    video.playsInline = true;
+                    video.setAttribute("playsinline", "");
+                    video.setAttribute("webkit-playsinline", "");
+                    video.preload = "metadata";
+
+                    // 用 <source> 明确 MIME 类型，兼容性更好
+                    const source = document.createElement("source");
+                    source.src = item.src;
+                    source.type = "video/mp4";
+                    video.appendChild(source);
+
+                    // 加载失败时显示提示和直链
+                    video.addEventListener("error", () => {
+                        wrapper.innerHTML = `
+                            <div class="media-fallback">
+                                <p><strong>This video could not be played in the browser.</strong></p>
+                                <p>It may be in an unsupported format or the path may be incorrect. You can open it directly:</p>
+                                <a href="${item.src}" target="_blank" rel="noopener">Open video in a new tab ↗</a>
+                            </div>
+                        `;
+                    });
+
+                    wrapper.appendChild(video);
+                } else {
+                    const img = document.createElement("img");
+                    img.src = item.src;
+                    img.alt = data.title;
+                    img.loading = "lazy";
+                    wrapper.appendChild(img);
+                }
+
+                mediaModalBody.appendChild(wrapper);
+            });
+
+            mediaModal.classList.add("show");
+        }
+
+        function closeMedia() {
+            mediaModal.classList.remove("show");
+            releaseMedia();
+        }
+
+        /* 卡片点击 */
+        document.querySelectorAll(".media-card").forEach(card => {
+            card.addEventListener("click", () => openMedia(card.dataset.category));
+        });
+
+        mediaCloseBtn.onclick = closeMedia;
+        mediaModal.addEventListener("click", e => {
+            if (e.target === mediaModal) closeMedia();
+        });
+
+        /* ---------- 全部媒体网格 ---------- */
         function buildGallery() {
             galleryGrid.innerHTML = "";
             Object.keys(mediaLibrary).forEach(key => {
@@ -756,7 +816,7 @@
                 const item = document.createElement("div");
                 item.className = "grid-item";
                 item.innerHTML = `
-                    <img src="${data.thumb}" alt="${data.title}">
+                    <img src="${data.thumb}" alt="${data.title}" loading="lazy">
                     ${first.type === "video" ? '<div class="play-badge">▶</div>' : ""}
                 `;
                 item.addEventListener("click", () => {
@@ -779,7 +839,7 @@
         /* ESC 关闭 */
         document.addEventListener("keydown", e => {
             if (e.key === "Escape") {
-                mediaModal.classList.remove("show");
+                closeMedia();
                 galleryModal.classList.remove("show");
             }
         });
