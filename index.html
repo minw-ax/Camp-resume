@@ -24,20 +24,62 @@
 
         .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
 
-        /* ================= Header & Avatar ================= */
+        /* ================= 升级版头部 ================= */
         header {
             text-align: center;
-            padding: 60px 0 40px;
-            background: linear-gradient(135deg, #E8F0EC 0%, #F8F9F6 100%);
-            border-radius: 20px;
+            padding: 70px 20px 50px;
+            background: 
+                radial-gradient(circle at 50% 120%, rgba(46, 92, 78, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 10% 20%, rgba(255, 200, 150, 0.2) 0%, transparent 40%),
+                linear-gradient(180deg, #E8F0EC 0%, #F4F8F6 100%);
+            border-radius: 24px;
             margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.6);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
         }
+
+        /* 漂浮光斑 */
+        header::before, header::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
+            animation: floatLight 8s infinite alternate ease-in-out;
+        }
+        header::before {
+            width: 200px; height: 200px;
+            background: rgba(255, 230, 200, 0.4);
+            top: -50px; left: 10%;
+        }
+        header::after {
+            width: 150px; height: 150px;
+            background: rgba(200, 230, 210, 0.4);
+            bottom: -20px; right: 10%;
+            animation-delay: -4s;
+        }
+        @keyframes floatLight {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(20px) scale(1.2); }
+        }
+
+        header > * { position: relative; z-index: 1; }
 
         .photo-wrapper { position: relative; display: inline-block; margin-bottom: 25px; padding: 15px; }
         .profile-pic {
             width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
-            border: 5px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: block;
+            border: 5px solid #fff; 
+            box-shadow: 0 10px 25px rgba(46, 92, 78, 0.2);
+            display: block;
+            animation: pulseGlow 3s infinite alternate;
         }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 10px 25px rgba(46, 92, 78, 0.15); }
+            100% { box-shadow: 0 10px 35px rgba(46, 92, 78, 0.4); }
+        }
+
         .leaf { position: absolute; width: 26px; height: 26px; z-index: 10; filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.2)); }
         .leaf-top    { top: -2px; left: 50%; margin-left: -13px; transform: rotate(45deg); fill: #4A8B6F; }
         .leaf-tr     { top: 15px; right: -5px; transform: rotate(90deg); fill: #2E5C4E; }
@@ -48,14 +90,44 @@
         .leaf-left   { top: 50%; left: -10px; margin-top: -13px; transform: rotate(315deg); fill: #4A8B6F; }
         .leaf-tl     { top: 15px; left: -5px; transform: rotate(0deg); fill: #2E5C4E; }
 
-        h1 { font-family: 'Lora', serif; font-size: 3em; color: var(--primary); margin-bottom: 10px; }
-        .subtitle { font-size: 1.2em; color: var(--text-light); margin-bottom: 20px; }
-
-        .keywords { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-        .tag {
-            background-color: #fff; color: var(--primary); padding: 6px 16px; border-radius: 20px;
-            font-size: 0.9em; font-weight: 600; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border: 1px solid #E0E7E3;
+        h1 { 
+            font-family: 'Lora', serif; 
+            font-size: 3.2em; 
+            color: var(--primary); 
+            margin-bottom: 8px; 
+            letter-spacing: -0.5px;
+            text-shadow: 1px 2px 4px rgba(255,255,255,0.8);
         }
+        .subtitle { 
+            font-size: 1.15em; 
+            color: #4A6B5D; 
+            font-weight: 600;
+            margin-bottom: 25px; 
+            letter-spacing: 1.5px;
+            text-transform: uppercase; 
+        }
+
+        /* 果冻标签 */
+        .keywords { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+        .tag {
+            background-color: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(10px);
+            color: var(--primary); 
+            padding: 8px 18px; 
+            border-radius: 24px;
+            font-size: 0.9em; 
+            font-weight: 600; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04); 
+            border: 1px solid rgba(255,255,255,0.9);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .tag:hover {
+            transform: translateY(-5px) scale(1.05);
+            background-color: #fff;
+            box-shadow: 0 10px 20px rgba(46, 92, 78, 0.15);
+            color: #1E4035;
+        }
+        /* ============================================== */
 
         /* ================= Sections ================= */
         section {
@@ -261,6 +333,9 @@
                 <svg class="leaf leaf-tl" viewBox="0 0 24 24"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.5,17.5 6,17.5C9.5,17.5 12.5,14.5 14.5,11.5C15.5,10 16.5,8.5 17,8Z"/></svg>
             </div>
 
+            <!-- 新增的欢迎语 -->
+            <p style="font-family: 'Lora', serif; font-style: italic; color: #7C9A8D; font-size: 1.1em; margin-bottom: 10px;">Welcome to my little corner of the wild 🌲</p>
+
             <h1>Sihan Wu (Sabrina)</h1>
             <div class="subtitle">Camp Counselor • Outdoor Enthusiast • CS Major</div>
             <div class="keywords">
@@ -322,7 +397,7 @@
 
         <!-- 心形带娃照片墙 -->
         <section>
-            <h2>Moments with Campers</h2>
+            <h2>Highlight Moments with Campers</h2>
             <p style="margin-bottom: 25px; color: #666; text-align: center;">Building connections, one small moment at a time.</p>
             
             <div class="heart-gallery-container">
