@@ -15,7 +15,7 @@
             --border-color: #D8E5DD;
         }
 
-        /* ================= 全局鼠标光标：定制小树叶 ================= */
+        /* ================= 全局鼠标光标：极简小松树 ================= */
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
@@ -24,7 +24,9 @@
             background-size: 24px 24px;
             color: var(--text-main);
             line-height: 1.6;
-            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 C 26 4 30 14 26 24 C 18 30 8 26 4 18 C 10 10 14 6 16 2 Z' fill='%232E5C4E' opacity='0.85'/%3E%3Cpath d='M16 2 L 8 18' stroke='%23F8F9F6' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") 16 16, auto;
+            
+            /* 极简小松树光标。如果觉得奇怪，把下面这行 cursor 删掉，就会恢复默认箭头 */
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 L28 18 L4 18 Z' fill='%234A8B6F'/%3E%3Cpath d='M16 10 L24 24 L8 24 Z' fill='%232E5C4E'/%3E%3Crect x='14' y='24' width='4' height='6' fill='%23A0522D' rx='1'/%3E%3C/svg%3E") 16 16, auto;
         }
 
         /* 美化滚动条 */
@@ -33,6 +35,7 @@
         ::-webkit-scrollbar-thumb { background: #9CB8A9; border-radius: 6px; border: 3px solid var(--bg-color); }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
+        /* 可点击的链接和按钮恢复默认手势 */
         a, button, .tag, .filter-btn, .polaroid, .photo-card, .film-frame, .lb-nav, .lb-close {
             cursor: pointer;
         }
