@@ -116,7 +116,8 @@
         .film-track {
             display: flex;
             width: max-content;
-            animation: scrollFilm 35s linear infinite;
+            /* 修改点：因为照片增加到15张，时长从 35s 调整为 90s，滚动更从容 */
+            animation: scrollFilm 90s linear infinite;
         }
 
         /* 鼠标悬停暂停滚动 */
@@ -135,6 +136,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
             transition: transform 0.3s ease;
             cursor: pointer;
+            flex-shrink: 0;
         }
 
         .film-frame:hover { transform: scale(1.05) rotate(1deg); z-index: 10; }
@@ -195,7 +197,8 @@
             .photo-grid img { height: 150px; }
             /* 手机端胶卷尺寸调小 */
             .film-frame img { width: 220px; height: 150px; }
-            .film-track { animation-duration: 20s; }
+            /* 修改点：手机端滚动时长稍微加快一点 */
+            .film-track { animation-duration: 45s; }
         }
     </style>
 </head>
@@ -292,21 +295,41 @@
             
             <div class="film-strip">
                 <div class="film-track">
-                    <!-- 第一组照片（已清空 alt 属性） -->
+                    <!-- 第一组照片（增加至15张） -->
                     <div class="film-group">
-                        <div class="film-frame"><img src="photo1.jpg" alt=""></div>
-                        <div class="film-frame"><img src="photo2.jpg" alt=""></div>
-                        <div class="film-frame"><img src="photo3.jpg" alt=""></div>
-                        <div class="film-frame"><img src="photo4.jpg" alt=""></div>
-                        <div class="film-frame"><img src="photo5.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio1.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio2.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio3.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio4.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio5.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio6.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio7.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio8.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio9.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio10.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio11.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio12.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio13.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio14.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio15.jpg" alt=""></div>
                     </div>
-                    <!-- 第二组照片（与第一组一致，用于无缝滚动） -->
+                    <!-- 第二组照片（与第一组完全一致，用于无缝滚动） -->
                     <div class="film-group">
-                        <div class="film-frame"><img src="photo1.jpg" alt=""></div>
-                        <div class="film-frame"><img src="photo2.jpg" alt=""></div>
-                        <div class="film-frame"><img src="photo3.jpg" alt=""></div>
-                        <div class="film-frame"><img src="photo4.jpg" alt=""></div>
-                        <div class="film-frame"><img src="photo5.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio1.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio2.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio3.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio4.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio5.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio6.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio7.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio8.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio9.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio10.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio11.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio12.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio13.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio14.jpg" alt=""></div>
+                        <div class="film-frame"><img src="portfolio15.jpg" alt=""></div>
                     </div>
                 </div>
             </div>
