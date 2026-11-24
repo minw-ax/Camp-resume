@@ -76,7 +76,7 @@
         .highlight-box { background-color: #F4F8F6; padding: 20px; border-radius: 12px; border-left: 4px solid var(--primary); }
         .highlight-box h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.1em; }
 
-        /* ========== 照片墙：筛选 + 瀑布流 ========== */
+        /* ================= 动态互动技能展示 ================= */
         .media-subhead {
             font-family: 'Lora', serif;
             color: var(--primary);
@@ -108,10 +108,7 @@
             cursor: pointer;
             transition: all 0.25s ease;
         }
-        .filter-btn:hover {
-            border-color: var(--primary);
-            background: #F4F8F6;
-        }
+        .filter-btn:hover { border-color: var(--primary); background: #F4F8F6; }
         .filter-btn.active {
             background: var(--primary);
             border-color: var(--primary);
@@ -119,74 +116,72 @@
             box-shadow: 0 4px 10px rgba(46, 92, 78, 0.25);
         }
 
-        /* CSS columns 瀑布流 */
-        .masonry {
-            column-count: 3;
-            column-gap: 16px;
+        /* 动态网格替换瀑布流 */
+        .dynamic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+            perspective: 1000px; /* 3D 效果 */
         }
+
         .photo-card {
-            break-inside: avoid;
-            margin-bottom: 16px;
             border-radius: 12px;
             overflow: hidden;
             position: relative;
             cursor: pointer;
             background: #E8F0EC;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.07);
-            transition: transform 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease;
-            opacity: 1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            /* 弹性动画入场 */
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transform-origin: center;
         }
+
+        /* 入场动画 */
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8) translateY(20px) rotateX(-10deg); }
+            100% { opacity: 1; transform: scale(1) translateY(0) rotateX(0); }
+        }
+
         .photo-card img {
             width: 100%;
+            height: 200px;
+            object-fit: cover;
             display: block;
-            transition: transform 0.6s ease, filter 0.4s ease;
+            transition: transform 0.5s ease, filter 0.3s ease;
         }
+
+        /* 3D 悬浮效果 */
         .photo-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(46, 92, 78, 0.22);
+            z-index: 10;
+            box-shadow: 0 15px 30px rgba(46, 92, 78, 0.3);
+            transform: translateY(-6px) scale(1.02);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .photo-card:hover img {
-            transform: scale(1.07);
+            transform: scale(1.1);
+            filter: brightness(0.9);
         }
+
         .photo-card .caption {
             position: absolute;
             left: 0; right: 0; bottom: 0;
-            padding: 26px 14px 12px;
-            background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
+            padding: 30px 14px 12px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
             color: #fff;
-            font-size: 0.88em;
+            font-size: 0.95em;
             font-weight: 600;
             opacity: 0;
-            transform: translateY(8px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            pointer-events: none;
+            transform: translateY(15px);
+            transition: all 0.3s ease;
         }
         .photo-card:hover .caption {
             opacity: 1;
             transform: translateY(0);
         }
-        .photo-card .cat-dot {
-            position: absolute;
-            top: 10px; left: 10px;
-            width: 10px; height: 10px;
-            border-radius: 50%;
-            background: #fff;
-            box-shadow: 0 0 0 2px rgba(46,92,78,0.35);
-        }
+        /* ================================================= */
 
-        /* 筛选时的淡出 */
-        .photo-card.hide {
-            display: none;
-        }
-        .photo-card.fade-in {
-            animation: fadeUp 0.45s ease both;
-        }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(14px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ================= 胶卷相册 ================= */
+        /* 胶卷相册 */
         .film-strip {
             background-color: #111;
             padding: 35px 0;
@@ -227,14 +222,14 @@
         }
         @keyframes scrollFilm { 100% { transform: translateX(-50%); } }
 
-        /* ========== 灯箱 ========== */
+        /* 灯箱 */
         .lightbox {
             display: none;
             position: fixed;
             z-index: 1000;
             inset: 0;
             background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(8px);
             align-items: center;
             justify-content: center;
             opacity: 0;
@@ -265,15 +260,14 @@
         .lightbox-caption {
             margin-top: 14px;
             color: #fff;
-            font-size: 1em;
+            font-size: 1.1em;
             font-weight: 600;
-            letter-spacing: 0.3px;
             text-align: center;
         }
         .lightbox-count {
             margin-top: 4px;
             color: rgba(255,255,255,0.6);
-            font-size: 0.82em;
+            font-size: 0.85em;
         }
         .lb-close {
             position: absolute;
@@ -287,7 +281,6 @@
             transition: opacity 0.2s, transform 0.2s;
         }
         .lb-close:hover { opacity: 1; transform: scale(1.1); }
-
         .lb-nav {
             position: absolute;
             top: 50%;
@@ -304,7 +297,6 @@
             align-items: center;
             justify-content: center;
             transition: background 0.25s ease, transform 0.25s ease;
-            backdrop-filter: blur(4px);
         }
         .lb-nav:hover { background: rgba(255,255,255,0.3); transform: translateY(-50%) scale(1.08); }
         .lb-prev { left: 20px; }
@@ -321,16 +313,13 @@
             .leaf-top { margin-left: -10px; }
             .leaf-bottom { margin-left: -10px; }
             .leaf-right, .leaf-left { margin-top: -10px; }
-            .masonry { column-count: 2; column-gap: 10px; }
-            .photo-card { margin-bottom: 10px; }
+            .dynamic-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+            .photo-card img { height: 140px; }
             .film-frame img { width: 220px; height: 150px; }
             .film-track { animation-duration: 45s; }
             .lb-prev { left: 6px; }
             .lb-next { right: 6px; }
             .lb-close { top: -40px; right: 0; font-size: 30px; }
-        }
-        @media (max-width: 480px) {
-            .masonry { column-count: 1; }
         }
     </style>
 </head>
@@ -353,7 +342,7 @@
             <h1>Sihan Wu (Sabrina)</h1>
             <div class="subtitle">Camp Counselor • Outdoor Enthusiast • CS Major</div>
             <div class="keywords">
-                <span class="tag">ENFP(Extraverted · Intuitive · Feeling · Perceiving)</span>
+                <span class="tag">ENFP</span>
                 <span class="tag">Child-friendly</span>
                 <span class="tag">Coachable</span>
                 <span class="tag">Sports & Outdoor Enthusiast</span>
@@ -367,7 +356,7 @@
             <p>Computer Science student from Xiangtan University with an Emergency Management minor, but my real classroom has been the outdoors. I’ve spent two summers as a camp counselor and logged solo ascents on seven 5,000m+ mountains. I’m an ENFP who loves leading small groups, bringing energy to a rainy day, and noticing the quiet kid in the back. I combine outdoor survival skills, youth counseling experience, and a love for photography and music to help campers grow.</p>
         </section>
 
-        <!-- ================= Outdoor & Skills ================= -->
+        <!-- Outdoor & Skills -->
         <section>
             <h2>Outdoor & Skills</h2>
 
@@ -401,8 +390,8 @@
                 <button class="filter-btn" data-filter="arts">Arts & Music</button>
             </div>
 
-            <!-- 瀑布流照片墙 -->
-            <div class="masonry" id="photoWall"></div>
+            <!-- 动态交互网格 -->
+            <div class="dynamic-grid" id="photoWall"></div>
         </section>
 
         <!-- Camp & Youth Leadership -->
@@ -495,36 +484,34 @@
 
     <script>
         /* =========================================================
-           照片库：全部改成照片
-           category: outdoor | sports | arts
+           照片库：文件名请确保在根目录（和 index.html 同级）
         ========================================================= */
         const photos = [
-            { src: "photos/kpop.jpg",            title: "K-pop Dance",              category: "arts" },
-            { src: "photos/ukulele.jpg",         title: "Ukulele",                  category: "arts" },
-            { src: "photos/musicfilm.jpg",       title: "Music Short Film",         category: "arts" },
-            { src: "photos/wuzhen.jpg",          title: "Wuzhen Theatre Festival",  category: "arts" },
-            { src: "photos/climbing.jpg",        title: "Rock Climbing",            category: "sports" },
-            { src: "photos/track.jpg",           title: "Track & Field",            category: "sports" },
-            { src: "photos/basketball.jpg",      title: "Basketball",               category: "sports" },
-            { src: "photos/swimming.jpg",        title: "Swimming",                 category: "sports" },
-            { src: "photos/archery.jpg",         title: "Archery",                  category: "sports" },
-            { src: "photos/snowmountain.jpg",    title: "Snow Mountains",           category: "outdoor" },
-            { src: "photos/naturephoto.jpg",     title: "Nature Photography",       category: "outdoor" },
-            { src: "photos/rafting.jpg",         title: "Rafting",                  category: "outdoor" },
-            { src: "photos/jungle.jpg",          title: "Jungle Survival",          category: "outdoor" },
-            { src: "photos/treeclimbing.jpg",    title: "Tree Climbing",            category: "outdoor" },
-            { src: "photos/jungleexplore.jpg",   title: "Jungle Exploration",       category: "outdoor" },
-            { src: "photos/camping.jpg",         title: "Wilderness Camping",       category: "outdoor" }
+            { src: "kpop.jpg",            title: "K-pop Dance",              category: "arts" },
+            { src: "ukulele.jpg",         title: "Ukulele",                  category: "arts" },
+            { src: "musicfilm.jpg",       title: "Music Short Film",         category: "arts" },
+            { src: "wuzhen.jpg",          title: "Wuzhen Theatre Festival",  category: "arts" },
+            { src: "climbing.jpg",        title: "Rock Climbing",            category: "sports" },
+            { src: "track.jpg",           title: "Track & Field",            category: "sports" },
+            { src: "basketball.jpg",      title: "Basketball",               category: "sports" },
+            { src: "swimming.jpg",        title: "Swimming",                 category: "sports" },
+            { src: "archery.jpg",         title: "Archery",                  category: "sports" },
+            { src: "snowmountain.jpg",    title: "Snow Mountains",           category: "outdoor" },
+            { src: "naturephoto.jpg",     title: "Nature Photography",       category: "outdoor" },
+            { src: "rafting.jpg",         title: "Rafting",                  category: "outdoor" },
+            { src: "jungle.jpg",          title: "Jungle Survival",          category: "outdoor" },
+            { src: "treeclimbing.jpg",    title: "Tree Climbing",            category: "outdoor" },
+            { src: "jungleexplore.jpg",   title: "Jungle Exploration",       category: "outdoor" },
+            { src: "camping.jpg",         title: "Wilderness Camping",       category: "outdoor" }
         ];
 
         const wall = document.getElementById("photoWall");
         const filterBar = document.getElementById("filterBar");
 
-        let currentFilter = "all";
-        let visiblePhotos = [];   // 当前筛选后的照片（供灯箱左右切换）
+        let visiblePhotos = []; 
         let currentIndex = 0;
 
-        /* ---------- 渲染照片墙 ---------- */
+        /* ---------- 渲染动态网格 ---------- */
         function renderWall(filter) {
             wall.innerHTML = "";
             const list = filter === "all"
@@ -533,8 +520,9 @@
 
             list.forEach((photo, i) => {
                 const card = document.createElement("div");
-                card.className = "photo-card fade-in";
-                card.style.animationDelay = (i * 0.04) + "s";
+                card.className = "photo-card";
+                // 加入交错动画延迟，产生“洗牌掉落”的效果
+                card.style.animationDelay = (i * 0.05) + "s";
                 card.dataset.index = i;
 
                 card.innerHTML = `
@@ -559,8 +547,7 @@
             filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
 
-            currentFilter = btn.dataset.filter;
-            renderWall(currentFilter);
+            renderWall(btn.dataset.filter);
         });
 
         /* ---------- 灯箱 ---------- */
