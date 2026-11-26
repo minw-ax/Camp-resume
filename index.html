@@ -38,13 +38,47 @@
         ::-webkit-scrollbar-thumb { background: #9CB8A9; border-radius: 6px; border: 3px solid var(--bg-color); }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
-        a, button, .tag, .filter-btn, .polaroid, .photo-card, .film-frame, .lb-nav, .lb-close, .cert-link, .cert-modal-close, .consent-toggle, .honor-cert-card {
+        a, button, .tag, .filter-btn, .polaroid, .photo-card, .film-frame, .lb-nav, .lb-close, .cert-link, .cert-modal-close, .consent-toggle, .honor-cert-card, .device-hint-close {
             cursor: pointer;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+
+        /* ===== 移动端顶部提示条 ===== */
+        .device-hint {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 46px 10px 16px;
+            background: #FFF8E7;
+            color: #7A5C2E;
+            font-size: 0.82em;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 1px solid #F0E2C4;
+            position: relative;
+            line-height: 1.45;
+        }
+        .device-hint-close {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            font-size: 1.35em;
+            line-height: 1;
+            color: #A08454;
+            padding: 4px 9px;
+            border-radius: 8px;
+            transition: background .2s ease;
+            font-family: inherit;
+        }
+        .device-hint-close:hover { background: rgba(160,132,84,0.14); }
+        .device-hint.hidden { display: none !important; }
 
         header {
             text-align: center;
@@ -490,7 +524,7 @@
 
         /* ===== 爱心拍立得墙 ===== */
         .heart-gallery-container {
-            position: relative; width: 100%; height: 480px; max-width: 800px; margin: 0 auto;
+            position: relative; width: 100%; height: 480px; max-width: 800px; margin: 0 auto 130px;
         }
         .polaroid {
             position: absolute; left: var(--x); top: var(--y); width: 150px;
@@ -800,6 +834,7 @@
         }
 
         @media (max-width: 768px) {
+            .device-hint { display: flex; }
             .grid-2 { grid-template-columns: 1fr; }
             h1 { font-size: 2.2em; }
             h1::before, h1::after { display: none; }
@@ -820,7 +855,7 @@
             .lb-next { right: 6px; }
             .lb-close { top: -40px; right: 0; font-size: 30px; }
 
-            .heart-gallery-container { height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+            .heart-gallery-container { height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; margin-bottom: 0; }
             .polaroid { position: relative; left: auto; top: auto; width: 100%; transform: none; animation: none; }
             .polaroid img { height: 120px; }
             .polaroid:hover { transform: scale(1.02) rotate(2deg); }
@@ -852,6 +887,12 @@
     </style>
 </head>
 <body>
+
+    <!-- ===== 移动端顶部提示条 ===== -->
+    <div class="device-hint" id="deviceHint">
+        <span>💻 For the best experience, view this site on a desktop.</span>
+        <button type="button" class="device-hint-close" id="deviceHintClose" aria-label="Dismiss">&times;</button>
+    </div>
 
     <!-- ===== 全宽通栏滚动横幅：核心理念（页面最顶部） ===== -->
     <div class="marquee-band" aria-label="My core philosophy as a counselor">
@@ -925,6 +966,9 @@
                         <li><strong>Solo High-Altitude Climbing:</strong> Summited multiple peaks over 5,000m, including the famous Daocheng Yading long route in heavy rain.</li>
                         <li><strong>Solo Travel:</strong> Traveled to 30+ cities, honing trip planning and risk management skills.</li>
                         <li><strong>Camper Experience:</strong> Attended art and adventure outdoor survival camps. I know exactly what it feels like to be a camper, which helps me see things from a child's perspective.</li>
+                        <li><strong>Multi-Day Trekking &amp; Camping:</strong> Planned and completed multi-day backcountry routes, independently managing gear, food, water, and campsite setup.</li>
+                        <li><strong>Weather &amp; Risk Decisions:</strong> Read weather and terrain in real time — knowing when to push, when to shelter, and when to turn back.</li>
+                        <li><strong>Group Outdoor Leadership:</strong> Translated solo experience into group settings — pacing, check-ins, route briefings, and keeping morale up on long hikes.</li>
                     </ul>
                 </div>
                 <div class="highlight-box">
@@ -980,7 +1024,7 @@
                 <div class="polaroid" style="--x: 70%; --y: 76%; --r: 5deg; --delay: 0.4s;">
                     <img src="kid7.jpg" alt="Camp memory 7">
                 </div>
-                <div class="polaroid" style="--x: 50%; --y: 88%; --r: 0deg; --delay: 0.6s;">
+                <div class="polaroid" style="--x: 50%; --y: calc(88% + 94px); --r: 0deg; --delay: 0.6s;">
                     <img src="kid8.jpg" alt="Camp memory 8">
                 </div>
             </div>
@@ -1164,6 +1208,23 @@
     </div>
 
     <script>
+        /* ========== 移动端提示条 ========== */
+        (function () {
+            const hint = document.getElementById("deviceHint");
+            const close = document.getElementById("deviceHintClose");
+            if (!hint || !close) return;
+            try {
+                if (sessionStorage.getItem("hideDeviceHint") === "1") {
+                    hint.classList.add("hidden");
+                    return;
+                }
+            } catch (e) {}
+            close.addEventListener("click", () => {
+                hint.classList.add("hidden");
+                try { sessionStorage.setItem("hideDeviceHint", "1"); } catch (e) {}
+            });
+        })();
+
         /* ========== 照片墙 ========== */
         const photos = [
             { src: "kpop.jpg",            title: "K-pop Dance",              category: "arts" },
