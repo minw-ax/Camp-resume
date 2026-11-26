@@ -218,46 +218,48 @@
         .availability-line  { animation: riseIn .85s .40s backwards cubic-bezier(.2,.7,.3,1); }
         .keywords           { animation: riseIn .85s .48s backwards cubic-bezier(.2,.7,.3,1); }
 
-        /* ===== 滚动横幅（不在栏目内） ===== */
+        /* ===== 全宽通栏滚动横幅（页面最顶部） ===== */
         .marquee-band {
             position: relative;
             overflow: hidden;
-            margin-bottom: 40px;
-            padding: 17px 0;
-            border-radius: 14px;
-            background: linear-gradient(90deg, #234438 0%, #2E5C4E 45%, #3B715E 55%, #234438 100%);
-            border: 1px solid rgba(255,255,255,0.18);
-            box-shadow: 0 12px 28px rgba(46,92,78,0.22), inset 0 1px 0 rgba(255,255,255,0.15);
+            width: 100%;
+            margin-bottom: 0;
+            padding: 24px 0;
+            border-radius: 0;
+            background: linear-gradient(90deg, #1E3B31 0%, #2E5C4E 45%, #3B715E 55%, #1E3B31 100%);
+            border-top: 1px solid rgba(255,255,255,0.12);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 8px 26px rgba(46,92,78,0.25), inset 0 1px 0 rgba(255,255,255,0.12);
         }
         .marquee-band::before, .marquee-band::after {
-            content: ''; position: absolute; top: 0; bottom: 0; width: 70px; z-index: 2; pointer-events: none;
+            content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none;
         }
-        .marquee-band::before { left: 0; background: linear-gradient(90deg, #234438 10%, rgba(35,68,56,0)); }
-        .marquee-band::after  { right: 0; background: linear-gradient(270deg, #234438 10%, rgba(35,68,56,0)); }
+        .marquee-band::before { left: 0; background: linear-gradient(90deg, #1E3B31 5%, rgba(30,59,49,0)); }
+        .marquee-band::after  { right: 0; background: linear-gradient(270deg, #1E3B31 5%, rgba(30,59,49,0)); }
 
         .marquee-track {
             display: flex;
             width: max-content;
-            animation: marqueeScroll 44s linear infinite;
+            animation: marqueeScroll 60s linear infinite;
         }
         .marquee-band:hover .marquee-track { animation-play-state: paused; }
 
         .marquee-group {
             display: flex;
             align-items: center;
-            gap: 46px;
-            padding-right: 46px;
+            gap: 56px;
+            padding-right: 56px;
         }
         .marquee-text {
             font-family: 'Lora', serif;
             font-style: italic;
-            font-size: 1.02em;
+            font-size: 1.22em;
             color: #EAF4EF;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.4px;
             white-space: nowrap;
         }
-        .marquee-text strong { color: #D9C4A3; font-style: normal; font-weight: 600; }
-        .marquee-sep { color: #D4A373; font-size: 0.9em; opacity: 0.9; }
+        .marquee-text strong { color: #E6C99A; font-style: normal; font-weight: 700; }
+        .marquee-sep { color: #D4A373; font-size: 1em; opacity: 0.95; }
 
         @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
@@ -516,22 +518,20 @@
             z-index: 60;
             display: flex;
             flex-direction: column;
-            gap: 9px;
+            gap: 10px;
             pointer-events: none;
         }
         .quality-chip {
             display: flex;
             align-items: center;
-            gap: 9px;
-            background: rgba(255,255,255,0.9);
+            gap: 10px;
+            background: rgba(255,255,255,0.92);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255,255,255,0.95);
             border-left: 4px solid var(--primary);
-            border-radius: 999px;
-            padding: 8px 17px 8px 13px;
-            font-size: 0.8em;
-            font-weight: 700;
+            border-radius: 16px;
+            padding: 9px 18px 9px 13px;
             color: var(--primary);
             letter-spacing: 0.2px;
             white-space: nowrap;
@@ -546,7 +546,11 @@
             box-shadow: 0 10px 26px rgba(46,92,78,0.3);
             background: #fff;
         }
-        .q-icon { font-size: 1.05em; line-height: 1; }
+        .q-icon { font-size: 1.3em; line-height: 1; }
+        .q-text { display: flex; flex-direction: column; line-height: 1.2; }
+        .q-main { font-size: 0.88em; font-weight: 700; letter-spacing: 0.2px; }
+        .q-sub { font-size: 0.66em; font-weight: 500; color: #7A9488; letter-spacing: 0.1px; margin-top: 2px; }
+
         @keyframes chipIn {
             from { opacity: 0; transform: translateX(-40px); }
             to   { opacity: 1; transform: translateX(0); }
@@ -565,8 +569,11 @@
                 left: 10px; right: 10px; bottom: 10px;
                 flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 6px;
             }
-            .quality-chip { font-size: 0.7em; padding: 6px 12px 6px 10px; gap: 6px; border-left-width: 3px; }
+            .quality-chip { padding: 7px 13px 7px 10px; gap: 6px; border-left-width: 3px; border-radius: 999px; }
             .quality-chip:hover { transform: translateY(-3px); }
+            .q-icon { font-size: 1.1em; }
+            .q-main { font-size: 0.76em; }
+            .q-sub { display: none; }
             body { padding-bottom: 76px; }
         }
 
@@ -598,9 +605,11 @@
             .honors-list { grid-template-columns: 1fr; }
             .availability-line { font-size: 0.8em; padding: 7px 16px; }
 
-            .marquee-text { font-size: 0.86em; }
-            .marquee-track { animation-duration: 28s; }
-            .marquee-group { gap: 26px; padding-right: 26px; }
+            .marquee-band { padding: 16px 0; }
+            .marquee-text { font-size: 0.92em; }
+            .marquee-track { animation-duration: 34s; }
+            .marquee-group { gap: 30px; padding-right: 30px; }
+            .marquee-band::before, .marquee-band::after { width: 50px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -612,6 +621,20 @@
     </style>
 </head>
 <body>
+
+    <!-- ===== 全宽通栏滚动横幅：核心理念（页面最顶部） ===== -->
+    <div class="marquee-band" aria-label="My core philosophy as a counselor">
+        <div class="marquee-track">
+            <div class="marquee-group">
+                <span class="marquee-text">Skills open the door — I turn <strong>every climb</strong>, <strong>every failed build</strong> &amp; <strong>every shared song</strong> into a growth conversation.</span>
+                <span class="marquee-sep">✦</span>
+            </div>
+            <div class="marquee-group" aria-hidden="true">
+                <span class="marquee-text">Skills open the door — I turn <strong>every climb</strong>, <strong>every failed build</strong> &amp; <strong>every shared song</strong> into a growth conversation.</span>
+                <span class="marquee-sep">✦</span>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <header>
@@ -652,20 +675,6 @@
                 <span class="tag">🗺️ Independent traveler(30+ cities)</span>
             </div>
         </header>
-
-        <!-- ===== 滚动横幅：核心理念 ===== -->
-        <div class="marquee-band" aria-label="My core philosophy as a counselor">
-            <div class="marquee-track">
-                <div class="marquee-group">
-                    <span class="marquee-text">The skill is only the doorway — my real work begins after it: helping kids find, in <strong>every climb</strong>, <strong>every failed build</strong>, <strong>every shared song</strong>, something true about themselves.</span>
-                    <span class="marquee-sep">✦</span>
-                </div>
-                <div class="marquee-group" aria-hidden="true">
-                    <span class="marquee-text">The skill is only the doorway — my real work begins after it: helping kids find, in <strong>every climb</strong>, <strong>every failed build</strong>, <strong>every shared song</strong>, something true about themselves.</span>
-                    <span class="marquee-sep">✦</span>
-                </div>
-            </div>
-        </div>
 
         <section>
             <h2>About Me</h2>
@@ -839,9 +848,27 @@
 
     <!-- ===== 常驻三大品质徽章 ===== -->
     <aside class="quality-rail" aria-label="My three core qualities as a camp counselor">
-        <div class="quality-chip"><span class="q-icon" aria-hidden="true">🧭</span><span>Patient &amp; Steady</span></div>
-        <div class="quality-chip"><span class="q-icon" aria-hidden="true">👀</span><span>Sees the Quiet Kid</span></div>
-        <div class="quality-chip"><span class="q-icon" aria-hidden="true">🌱</span><span>Turns Doing into Growing</span></div>
+        <div class="quality-chip">
+            <span class="q-icon" aria-hidden="true">⚡</span>
+            <span class="q-text">
+                <span class="q-main">Playful Energizer</span>
+                <span class="q-sub">ENFP · sports · music · photography</span>
+            </span>
+        </div>
+        <div class="quality-chip">
+            <span class="q-icon" aria-hidden="true">👂</span>
+            <span class="q-text">
+                <span class="q-main">Quiet-Kid Listener</span>
+                <span class="q-sub">radar for the quiet kid</span>
+            </span>
+        </div>
+        <div class="quality-chip">
+            <span class="q-icon" aria-hidden="true">🌱</span>
+            <span class="q-text">
+                <span class="q-main">Growth-Minded</span>
+                <span class="q-sub">skills open the door to growth</span>
+            </span>
+        </div>
     </aside>
 
     <!-- 灯箱 -->
