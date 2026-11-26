@@ -38,7 +38,7 @@
         ::-webkit-scrollbar-thumb { background: #9CB8A9; border-radius: 6px; border: 3px solid var(--bg-color); }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
-        a, button, .tag, .filter-btn, .polaroid, .photo-card, .film-frame, .lb-nav, .lb-close, .cert-link, .cert-modal-close {
+        a, button, .tag, .filter-btn, .polaroid, .photo-card, .film-frame, .lb-nav, .lb-close, .cert-link, .cert-modal-close, .consent-toggle, .honor-cert-card {
             cursor: pointer;
         }
 
@@ -399,6 +399,36 @@
         }
         .honors-list li strong { color: var(--primary); }
 
+        /* ===== 荣誉证书缩略图卡片 ===== */
+        .honor-cert-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 22px;
+            padding: 12px;
+            background: #F8FBF9;
+            border: 1px dashed #BFD6C8;
+            border-radius: 14px;
+            transition: all .25s ease;
+        }
+        .honor-cert-card:hover {
+            background: #fff;
+            box-shadow: 0 6px 16px rgba(46,92,78,0.1);
+            transform: translateY(-2px);
+        }
+        .hc-img {
+            flex-shrink: 0;
+            width: 96px;
+            height: 68px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #E8F0EC;
+        }
+        .hc-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .hc-info { display: flex; flex-direction: column; gap: 3px; }
+        .hc-title { font-weight: 700; color: var(--primary); font-size: 0.92em; }
+        .hc-sub { font-size: 0.76em; color: var(--text-light); }
+
         .media-subhead {
             font-family: 'Lora', serif;
             color: var(--primary);
@@ -458,8 +488,9 @@
         }
         .photo-card:hover .caption { opacity: 1; transform: translateY(0); }
 
+        /* ===== 爱心拍立得墙 ===== */
         .heart-gallery-container {
-            position: relative; width: 100%; height: 450px; max-width: 800px; margin: 0 auto;
+            position: relative; width: 100%; height: 480px; max-width: 800px; margin: 0 auto;
         }
         .polaroid {
             position: absolute; left: var(--x); top: var(--y); width: 150px;
@@ -479,6 +510,42 @@
             0% { margin-top: -8px; }
             100% { margin-top: 8px; }
         }
+
+        /* ===== 爱心区肖像权说明（可展开小胶囊） ===== */
+        .consent-note {
+            margin-top: 22px;
+            text-align: center;
+        }
+        .consent-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #D8E5DD;
+            border-radius: 999px;
+            padding: 6px 15px;
+            font-size: 0.78em;
+            font-weight: 600;
+            color: var(--primary);
+            transition: all .25s ease;
+            font-family: inherit;
+            line-height: 1.4;
+        }
+        .consent-toggle:hover { background: #fff; box-shadow: 0 4px 12px rgba(46,92,78,0.1); }
+        .consent-chevron { font-size: 0.8em; transition: transform .3s ease; display: inline-block; }
+        .consent-note.open .consent-chevron { transform: rotate(180deg); }
+        .consent-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s ease, opacity .3s ease, margin-top .3s ease;
+            opacity: 0;
+            font-size: 0.8em;
+            color: #557163;
+            line-height: 1.6;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+        .consent-note.open .consent-body { max-height: 140px; opacity: 1; margin-top: 10px; }
 
         .film-strip {
             background-color: #111; padding: 35px 0; position: relative;
@@ -768,6 +835,11 @@
             .marquee-band::before, .marquee-band::after { width: 50px; }
 
             .cert-modal-inner { padding: 20px; }
+
+            .honor-cert-card { flex-direction: row; }
+            .hc-img { width: 80px; height: 58px; }
+            .hc-title { font-size: 0.85em; }
+            .hc-sub { font-size: 0.72em; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -887,26 +959,41 @@
             <p style="margin-bottom: 25px; color: #666; text-align: center;">Building connections, one small moment at a time.</p>
 
             <div class="heart-gallery-container">
-                <div class="polaroid" style="--x: 25%; --y: 20%; --r: -8deg; --delay: 0s;">
+                <div class="polaroid" style="--x: 25%; --y: 16%; --r: -8deg; --delay: 0s;">
                     <img src="kid1.jpg" alt="Camp memory 1">
                 </div>
-                <div class="polaroid" style="--x: 75%; --y: 20%; --r: 8deg; --delay: 0.5s;">
+                <div class="polaroid" style="--x: 75%; --y: 16%; --r: 8deg; --delay: 0.5s;">
                     <img src="kid2.jpg" alt="Camp memory 2">
                 </div>
-                <div class="polaroid" style="--x: 15%; --y: 50%; --r: -4deg; --delay: 1s;">
+                <div class="polaroid" style="--x: 14%; --y: 47%; --r: -4deg; --delay: 1s;">
                     <img src="kid3.jpg" alt="Camp memory 3">
                 </div>
-                <div class="polaroid" style="--x: 50%; --y: 55%; --r: 2deg; --delay: 0.3s;">
+                <div class="polaroid" style="--x: 50%; --y: 50%; --r: 2deg; --delay: 0.3s;">
                     <img src="kid4.jpg" alt="Camp memory 4">
                 </div>
-                <div class="polaroid" style="--x: 85%; --y: 50%; --r: 6deg; --delay: 0.8s;">
+                <div class="polaroid" style="--x: 86%; --y: 47%; --r: 6deg; --delay: 0.8s;">
                     <img src="kid5.jpg" alt="Camp memory 5">
                 </div>
-                <div class="polaroid" style="--x: 30%; --y: 80%; --r: -6deg; --delay: 1.2s;">
+                <div class="polaroid" style="--x: 30%; --y: 76%; --r: -6deg; --delay: 1.2s;">
                     <img src="kid6.jpg" alt="Camp memory 6">
                 </div>
-                <div class="polaroid" style="--x: 70%; --y: 80%; --r: 5deg; --delay: 0.4s;">
+                <div class="polaroid" style="--x: 70%; --y: 76%; --r: 5deg; --delay: 0.4s;">
                     <img src="kid7.jpg" alt="Camp memory 7">
+                </div>
+                <div class="polaroid" style="--x: 50%; --y: 88%; --r: 0deg; --delay: 0.6s;">
+                    <img src="kid8.jpg" alt="Camp memory 8">
+                </div>
+            </div>
+
+            <!-- 可展开的肖像权说明 -->
+            <div class="consent-note" id="consentNote">
+                <button type="button" class="consent-toggle" id="consentToggle" aria-expanded="false" aria-controls="consentBody">
+                    <span aria-hidden="true">🛡️</span>
+                    <span>Photo consent note</span>
+                    <span class="consent-chevron" aria-hidden="true">▾</span>
+                </button>
+                <div class="consent-body" id="consentBody">
+                    <p>Every photo featuring children was taken at our community-based camps, where parents were fully informed in advance and gave explicit consent for public promotion. Shared here with care and respect for each family.</p>
                 </div>
             </div>
         </section>
@@ -942,13 +1029,28 @@
         <section>
             <h2>Honors & Leadership</h2>
             <ul class="honors-list">
-                <li><strong>Outstanding Student Leader</strong></li>
-                <li><strong>Outstanding Volunteer Awards</strong> — Multiple Programs/Projects</li>
+                <li><strong>Track &amp; Field</strong> — 3rd &amp; 6th Place, University Sports Meet</li>
+                <li><strong>Outstanding Volunteer</strong></li>
+                <li><strong>Outstanding Student Officer</strong></li>
+                <li><strong>Outstanding Individual in Volunteer Service</strong></li>
+                <li><strong>Outstanding Social Worker</strong></li>
+                <li><strong>Competition Awards</strong> — Multiple Events</li>
                 <li><strong>Captain</strong>, University Hosting/Emcee Team</li>
                 <li><strong>Head of Sports Department</strong>, Student Union</li>
-                <li><strong>Ranked Top 30%</strong> in Comprehensive Evaluation, Freshman Year</li>
                 <li><strong>Class Monitor</strong>, Middle School &amp; High School</li>
+                <li><strong>Ranked Top 30%</strong> in Comprehensive Evaluation, Freshman Year</li>
             </ul>
+
+            <!-- 荣誉证书缩略图 -->
+            <div class="honor-cert-card" id="honorCertCard" role="button" tabindex="0" aria-label="View honors and awards certificate collection">
+                <div class="hc-img">
+                    <img src="honor-certificates.jpg" alt="Partial collection of honors and awards certificates">
+                </div>
+                <div class="hc-info">
+                    <span class="hc-title">📜 Certificate Collection</span>
+                    <span class="hc-sub">A partial snapshot of awards &amp; recognitions — click to enlarge</span>
+                </div>
+            </div>
         </section>
 
         <!-- Photography Portfolio -->
@@ -1084,6 +1186,11 @@
             { src: "camping.jpg",         title: "Wilderness Camping",       category: "outdoor" }
         ];
 
+        /* ========== 荣誉证书（可继续添加多张） ========== */
+        const honorCerts = [
+            { src: "honor-certificates.jpg", title: "Honors & Awards — Certificate Collection (partial)" }
+        ];
+
         const wall = document.getElementById("photoWall");
         const filterBar = document.getElementById("filterBar");
 
@@ -1182,6 +1289,22 @@
             if (e.target === lightbox) closeLightbox();
         });
 
+        /* ========== 荣誉证书点击打开灯箱 ========== */
+        const honorCertCard = document.getElementById("honorCertCard");
+        if (honorCertCard) {
+            const openHonorCerts = () => {
+                visiblePhotos = honorCerts;
+                openLightbox(0);
+            };
+            honorCertCard.addEventListener("click", openHonorCerts);
+            honorCertCard.addEventListener("keydown", e => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    openHonorCerts();
+                }
+            });
+        }
+
         /* ========== CPR 证书弹窗 ========== */
         const certBtn = document.getElementById("cprCertBtn");
         const certModal = document.getElementById("certModal");
@@ -1218,18 +1341,30 @@
 
         renderWall("all");
 
+        /* ========== 爱心区肖像权说明展开/收起 ========== */
+        (function () {
+            const note = document.getElementById("consentNote");
+            const toggle = document.getElementById("consentToggle");
+            if (!note || !toggle) return;
+            toggle.addEventListener("click", () => {
+                const isOpen = note.classList.toggle("open");
+                toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            });
+        })();
+
         /* ========== 滚动入场动画 ========== */
         (function () {
             const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
             const revealTargets = document.querySelectorAll(
                 "section, .highlight-box, .exp-item, .honors-list li, .media-subhead, " +
-                ".filter-bar, .heart-gallery-container, .film-strip, .portfolio-note, .marquee-band"
+                ".filter-bar, .heart-gallery-container, .consent-note, .honor-cert-card, " +
+                ".film-strip, .portfolio-note, .marquee-band"
             );
 
             document.querySelectorAll(".honors-list").forEach(list => {
                 Array.from(list.children).forEach((li, i) => {
-                    li.style.transitionDelay = (i * 0.07) + "s";
+                    li.style.transitionDelay = (i * 0.06) + "s";
                 });
             });
             document.querySelectorAll(".grid-2").forEach(grid => {
